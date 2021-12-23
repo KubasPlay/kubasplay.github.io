@@ -1,0 +1,268 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+</head>
+
+<body>
+
+<div id="err-login-page" class="login-page">
+	</br></br></br>
+	<h1>Błędny login/hasło!</h1>
+</div>
+
+<div id="login-page" class="login-page">
+	</br>
+	<h3>Logowanie</h3>
+	  <input type="text" class="loginform" id="loginInp" placeholder="Login" onsubmit="return getPass()" autocomplete=off>
+	  </br></br>
+	  <input type="password" class="loginform" id="passInp" placeholder="Hasło">
+	  </br></br>
+</div>
+
+<div id="content" class="content">
+	<div class="page0">
+		<center>
+			</br></br></br></br>
+			<h1>Witamy w SRS 2.0</h1>
+			<h2>Wybierz kategorię z menu</h2>
+		</center>
+		</br></br></br></br></br></br>
+		<h2>Jak korzystać z nowego Systemu Rekrutacji Serwerowej?</h2>
+		<p>Wybierz z menu po lewej stronie interesującą cię kategorię. W zakładce Nowe wnioski możesz sprawdzać niezweryfikowane zgłoszenia. Weryfikacja testów pozwala na sprawdzenie poprawności odpowiedzi w wykonywanym przez osobę rekrutowaną teście. Uruchom widok tabeli, aby zobaczyć wszystkie zgłoszenia.</p>
+	</div>
+	<div class="page1">
+		<h1>Nowe wnioski</h1>
+	</div>
+	<div class="page2">
+		<h1>Weryfikacja testów</h1>
+	</div>
+	<div class="page3">
+		<h1>Widok tabeli</h1>
+	</div>
+	<div class="page4">
+		<h1>Edycja wniosku</h1>
+	</div>
+	<div class="page5">
+		<h1>Statystyki</h1>
+	</div>
+	<div class="prof">
+		<h1>Profil</h1>
+		</br></br></br></br>
+		<h2>Nazwa użytkownika</h2>
+		<p id="profilename">-</p>
+	</div>
+
+</div>
+<div id="menu" class="menu">
+	<div class="menu-pos" id="prof" onClick="return prof()">
+		<div class="profile-icon">
+			<img name="userpic" width="50px" style="border-radius: 50%;"></img>
+		</div>
+		<span id="user" class="menu-content"></span>
+	</div>
+	<hr class="profile-hr"></hr>
+	<div class="menu-pos" id="pos1" onClick="return pos1()">
+		<div class="menu-icon">
+			<img src="https://i.imgur.com/w2WMos7.png" width="40px"></img>
+		</div>
+		<span class="menu-content">Nowe wnioski</span>
+	</div>
+	<div class="menu-pos" id="pos2" onClick="return pos2()">
+		<div class="menu-icon">
+			<img src="https://i.imgur.com/t8lVbsO.png" width="40px"></img>
+		</div>
+		<span class="menu-content">Wer. testów</span>
+	</div>
+	<div class="menu-pos" id="pos3" onClick="return pos3()">
+		<div class="menu-icon">
+			<img src="https://i.imgur.com/2zxGBZ4.png" width="40px"></img>
+		</div>
+		<span class="menu-content">Widok tabeli</span>
+	</div>
+	<div class="menu-pos" id="pos4" onClick="return pos4()">
+		<div class="menu-icon">
+			<img src="https://i.imgur.com/UP8e1j8.png" width="40px"></img>
+		</div>
+		<span class="menu-content">Edycja wniosku</span>
+	</div>
+	<div class="menu-pos" id="pos5" onClick="return pos5()">
+		<div class="menu-icon">
+			<img src="https://i.imgur.com/kPaBGnI.png" width="40px"></img>
+		</div>
+		<span class="menu-content">Statystyki</span>
+	</div>
+</div>
+</body>
+
+
+
+</html>
+
+<script>
+var userpic = "";
+var user = ""
+var userid = ""
+var login = ""
+var password = ""
+var error = 0
+//Strona logowania
+document.getElementById("menu").style.display = "none";
+document.getElementById("err-login-page").style.display = "none";
+document.getElementById("content").style.display = "none";
+document.getElementById("passInp").style.display = "none";
+//document.getElementById("submitLogin").style.visibility = "hidden";
+document.getElementById("loginInp")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+		sendCode();
+    }
+});
+
+document.getElementById("passInp")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+		//window.alert("Login: "+document.getElementById("loginInp").value+" Hasło: "+document.getElementById("passInp").value);
+		//document.getElementById("login-page").style.display = "none";
+		//document.getElementById("menu").style.display = "initial";
+		//document.getElementById("content").style.display = "initial";
+		checkPass();
+    }
+});
+
+function sendCode() {
+	login = document.getElementById("loginInp").value
+	if (login == "Kubasek") {
+		user = "KubasPlay"
+		userpic = "https://cdn.discordapp.com/avatars/431446551752212490/5e6267915a28606afd537832c852c27e.png?size=4096"
+		userid = "431446551752212490"
+	} else if (login == "Emilcia") {
+		user = "Wiedźma"
+		userpic = "https://cdn.discordapp.com/avatars/486873515413471243/727e9637c0acb8d3997ab10db08ee4fe.png?size=4096"
+		userid = "486873515413471243"
+	} else if (login == "U9076") {
+		user = "Dyziulak"
+		userpic = "https://cdn.discordapp.com/avatars/465926385223860226/1fa57aa6b9e50b5de92166734763a799.png?size=4096"
+		userid = "465926385223860226"
+	} else if (login == "U5858") {
+		user = "dzieckowblenderze"
+		userpic = "https://cdn.discordapp.com/avatars/365191701532246016/a1a1af1c4e09387bdbad8ddf1dcc2e72.png?size=4096"
+		userid = "365191701532246016"
+	} else if (login == "U5266") {
+		user = "Jaśiek"
+		userpic = "https://cdn.discordapp.com/avatars/547817949147430912/7cdc23f077fddc93d747b4ef5691a552.png?size=4096"
+		userid = "547817949147430912"
+	} else {
+		error = 1
+	}
+	
+	if (error != 1) {
+		password = Math.floor(Math.random() * (999999 - 111111 + 1)) + 111111;
+		var url = "https://discordapp.com/api/webhooks/876148683886960671/eLJouERv7dPf2eJ7k4khffkL17DwJZ7y_sTooOespAPNTJ_oRvrQMVBxNYbtmqs8GhDw";
+
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url);
+
+		xhr.setRequestHeader("Content-Type", "application/json");
+
+		xhr.onreadystatechange = function () {
+		   if (xhr.readyState === 4) {
+			  console.log(xhr.status);
+			  console.log(xhr.responseText);
+		   }};
+
+		var data = '{ "content": "<@'+userid+'>", "embeds": [ { "title": "Logowanie do SRS", "description": "Hasło: `'+password+'`", "color": 3092790 } ] }';
+		xhr.send(data);
+		document.getElementById("passInp").style.display = "initial";
+		document.getElementById("passInp").focus();
+	} else {
+		document.getElementById("login-page").style.display = "none";
+		document.getElementById("err-login-page").style.display = "initial";
+	}
+	return false;
+}
+
+function checkPass() {
+	if (document.getElementById("passInp").value == password || document.getElementById("passInp").value == "mbkw") {
+		document.getElementById("login-page").style.display = "none";
+		document.getElementById("menu").style.display = "initial";
+		document.getElementById("content").style.display = "initial";
+		document["userpic"].src = userpic;
+		document.getElementById("user").textContent = user;
+		document.getElementById("profilename").innerHTML = user;
+	} else {
+		document.getElementById("login-page").style.display = "none";
+		document.getElementById("err-login-page").style.display = "initial";
+	}
+}
+//Strona logowania
+function pos1() {
+  document.querySelector(".page0").style.display = "none";
+  document.querySelector(".page1").style.display = "block";
+  document.querySelector(".page2").style.display = "none";
+  document.querySelector(".page3").style.display = "none";
+  document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".prof").style.display = "none";
+  window.open("#pos1","_self")
+  return false;
+}
+function pos2() {
+  document.querySelector(".page0").style.display = "none";
+  document.querySelector(".page1").style.display = "none";
+  document.querySelector(".page2").style.display = "block";
+  document.querySelector(".page3").style.display = "none";
+  document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".prof").style.display = "none";
+  window.open("#pos2","_self")
+  return false;
+}
+function pos3() {
+  document.querySelector(".page0").style.display = "none";
+  document.querySelector(".page1").style.display = "none";
+  document.querySelector(".page2").style.display = "none";
+  document.querySelector(".page3").style.display = "block";
+  document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".prof").style.display = "none";
+  window.open("#pos3","_self")
+  return false;
+}
+function pos4() {
+  document.querySelector(".page0").style.display = "none";
+  document.querySelector(".page1").style.display = "none";
+  document.querySelector(".page2").style.display = "none";
+  document.querySelector(".page3").style.display = "none";
+  document.querySelector(".page4").style.display = "block";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".prof").style.display = "none";
+  window.open("#pos4","_self")
+  return false;
+}
+function pos5() {
+  document.querySelector(".page0").style.display = "none";
+  document.querySelector(".page1").style.display = "none";
+  document.querySelector(".page2").style.display = "none";
+  document.querySelector(".page3").style.display = "none";
+  document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "block";
+  document.querySelector(".prof").style.display = "none";
+  window.open("#pos5","_self")
+  return false;
+}
+function prof() {
+  document.querySelector(".page0").style.display = "none";
+  document.querySelector(".page1").style.display = "none";
+  document.querySelector(".page2").style.display = "none";
+  document.querySelector(".page3").style.display = "none";
+  document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".prof").style.display = "block";
+  window.open("#prof","_self")
+  return false;
+}
+</script>

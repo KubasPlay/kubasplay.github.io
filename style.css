@@ -1,0 +1,197 @@
+.menu{
+	position: fixed;
+	background-color: #1e6c93;
+	width: 75px;
+	height: 100%;
+	transition: width 0.3s;
+	transition-timing-function: ease-out;
+	display: initial;
+}
+.menu div:target {
+  background-color: #0e5a80;
+}
+.content{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	display: initial;
+}
+h1{
+	margin-bottom: 0;
+	font-family: Lato;
+	font-size: 50px;
+	color: #1e6c93;
+	font-weight: normal;
+}
+h2{
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: Lato;
+	font-size: 30px;
+	color: #1e6c93;
+	font-weight: normal;
+}
+h3{
+	margin-top: 0;
+	font-family: Lato;
+	font-size: 35px;
+	color: white;
+	font-weight: normal;
+}
+p{
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: Lato;
+	font-size: 20px;
+	color: black;
+	font-weight: normal;
+}
+.menu-icon{
+	display: inline-block;
+    vertical-align: middle;
+	width: 57.5px;
+	height: 57.5px;
+	margin-left: 17.5px;
+	margin-top: 17.5px;
+}
+.profile-icon{
+	display: inline-block;
+    vertical-align: middle;
+	width: 62.5px;
+	height: 62.5px;
+	margin-left: 12.5px;
+	margin-top: 12.5px;
+}
+.menu:hover{
+	width: 300px;
+}
+.menu-content{
+	opacity: .0;
+	font-family: Lato;
+	font-size: 25px;
+	color: white;
+	margin-left: 5px;
+    vertical-align: middle;
+	transition: opacity 0.09s ease-out;
+}
+.menu:hover .menu-content{
+	opacity: 1;
+	transition: opacity 0.25s ease-out 0.25s;
+}
+.menu:hover .profile-hr{
+	width: 280px;
+	transition: width 0.3s ease-out;
+}
+.profile{
+	height: 75px;
+}
+.profile-hr{
+	margin-top: 0;
+	margin-left: 7.5px;
+	width: 57.5px;
+	transition: width 0.2s ease-out;
+	border: 2px solid white;
+	border-radius: 5px
+}
+.menu-pos{
+	height: 75px;
+	cursor: pointer;
+}
+.menu-pos:hover{
+	background-color: #19648a;
+}
+body{
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+}
+.page0 {
+	display: block;
+	margin-left: 100px;
+}
+.page1 {
+	display: none;
+	margin-left: 100px;
+}
+.page2 {
+	display: none;
+	margin-left: 100px;
+}
+.page3 {
+	display: none;
+	margin-left: 100px;
+}
+.page4 {
+	display: none;
+	margin-left: 100px;
+}
+.page5 {
+	display: none;
+	margin-left: 100px;
+}
+.prof {
+	display: none;
+	margin-left: 100px;
+}
+.login-page {
+	width: 500px;
+	height: 100%;
+	text-align: center;
+	background-color: #1e6c93; 
+	-webkit-box-shadow:0px 0px 50px 8px #636363 ;
+	-moz-box-shadow:0px 0px 50px 8px #636363 ;
+	box-shadow:0px 0px 50px 8px #636363 ;
+	padding-top: 10%;
+}
+.login-page2 {
+	width: 500px;
+	height: 100%;
+	text-align: center;
+	background-color: #1e6c93; 
+	-webkit-box-shadow:0px 0px 50px 8px #636363 ;
+	-moz-box-shadow:0px 0px 50px 8px #636363 ;
+	box-shadow:0px 0px 50px 8px #636363 ;
+	padding-top: 10%;
+}
+.loginform {
+	width: 75%;
+	height: 40px;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border: none;
+	font-size: 20px;
+	padding-left: 5px;
+}
+.loginform2 {
+	width: 75%;
+	height: 40px;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border: none;
+	font-size: 20px;
+	padding-left: 5px;
+	background-color: #19648a;
+	color: white;
+}
+.loginform:focus {
+	outline:none;
+}
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}
