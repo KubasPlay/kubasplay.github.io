@@ -124,7 +124,7 @@ var login = ""
 var password = ""
 var error = 0
 var nrzgloszenia = "";
-var updatemessage = "status twojego podania uległ zmianie. Kliknij tutaj, aby sprawdzić aktualny status.";
+var updatemessage = "status twojego podania uległ zmianie. [Kliknij tutaj](https://sites.google.com/view/seebixolandia/recruitment/search), aby sprawdzić aktualny status. (SRS 2.0)";
 
 var jsonData = "" //ZMIENNA Z DANYMI Z BAZY DANYCH
 var jsonData2 = "";
@@ -291,7 +291,7 @@ function prof() {
   return false;
 }
 function createTable() {
-	document.getElementById("tabelka").innerHTML = "</br></br></br><center><h1>Generowanie tabeli</h1><h2>Proszę czkeać...</h2></center>";
+	document.getElementById("tabelka").innerHTML = "</br></br></br><center><h1>Generowanie tabeli</h1><h2>Proszę czekać...</h2></center>";
 	let req = new XMLHttpRequest();
 
 	req.onreadystatechange = () => {
@@ -480,6 +480,22 @@ function saveState(numerzgloszenia, state) {
 			danezgloszenia = danezgloszenia.split(';');
 			if (danezgloszenia[0] == numerzgloszenia) {
 				koddowpisu = koddowpisu + '"'+danezgloszenia[0]+'": "'+danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+state+'", '
+				var url = "https://discordapp.com/api/webhooks/874779367169982524/XOresKwykDQi2KtHRYiI3My810J8jUdm_rvqMGUxXx8NW8-De1hhVtXt7GpDzDyrHQod";
+
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", url);
+
+				xhr.setRequestHeader("Content-Type", "application/json");
+
+				xhr.onreadystatechange = function () {
+				   if (xhr.readyState === 4) {
+					  console.log(xhr.status);
+					  console.log(xhr.responseText);
+				   }};
+
+				var data = '{"content": ":exclamation: <@'+danezgloszenia[1]+'>, '+updatemessage+'","embeds": null}';
+
+				xhr.send(data);
 			} else {
 				koddowpisu = koddowpisu + '"'+danezgloszenia[0]+'": "'+danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+danezgloszenia[3]+'", '
 			}
