@@ -195,3 +195,34 @@ a{
 :-ms-input-placeholder {  
    text-align: center; 
 }
+table.tabelka {
+  border: 2px solid #FFFFFF;
+  text-align: left;
+  width: 90%;
+  font-family: Helvetica, sans-serif;
+  border-collapse: collapse;
+}
+table.tabelka td, table.tabelka th {
+  border: 1px solid #000000;
+  padding: 3px 4px;
+}
+table.tabelka tbody td {
+  font-size: 13px;
+}
+table.tabelka thead {
+  background: #FFFFFF;
+  border-bottom: 4px solid #333333;
+}
+table.tabelka thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+}
+table.tabelka tfoot td {
+  font-size: 14px;
+}
+.tabelka-row:hover {
+	background-color: #f9f9f9;
+	cursor: pointer;
+}
