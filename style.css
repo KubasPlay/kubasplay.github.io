@@ -135,6 +135,10 @@ a{
 	display: none;
 	margin-left: 100px;
 }
+.reload {
+	display: none;
+	margin-left: 100px;
+}
 .login-page {
 	width: 500px;
 	height: 100%;
@@ -164,6 +168,7 @@ a{
 	border: none;
 	font-size: 20px;
 	padding-left: 5px;
+	outline:none;
 }
 .loginform2 {
 	width: 75%;
@@ -177,8 +182,38 @@ a{
 	background-color: #19648a;
 	color: white;
 }
-.loginform:focus {
-	outline:none;
+.input {
+	height: 50px;
+	border-radius:10px 0px 0px 10px;
+	-moz-border-radius:10px 0px 0px 10px;
+	-webkit-border-radius:10px 0px 0px 10px;
+	border: 1px solid #363636;
+	font-size: 20px;
+	padding-left: 5px;
+	outline: none;
+}
+.edit-button {
+	height: 54px;
+	width: 100px;
+	border-radius:0px 10px 10px 0px;
+	-moz-border-radius:0px 10px 10px 0px;
+	-webkit-border-radius:0px 10px 10px 0px;
+	border: none;
+	font-size: 20px;
+	padding-left: 5px;
+	background-color: #1e6c93;
+	color: white;
+}
+.edit-button2 {
+	height: 50px;
+	border-radius:0px 10px 10px 0px;
+	-moz-border-radius:0px 10px 10px 0px;
+	-webkit-border-radius:0px 10px 10px 0px;
+	border: none;
+	font-size: 20px;
+	padding-left: 5px;
+	background-color: #1e6c93;
+	color: white;
 }
 table {
   border: 2px solid #FFFFFF;
@@ -210,19 +245,4 @@ table tfoot td {
 .tabelka-row:hover{
 	background-color: #f9f9f9;
 	cursor: pointer;
-}
-::-webkit-input-placeholder {
-   text-align: center;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   text-align: center;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   text-align: center;  
-}
-
-:-ms-input-placeholder {  
-   text-align: center; 
 }

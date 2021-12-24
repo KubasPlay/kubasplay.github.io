@@ -14,7 +14,7 @@
 
 <div id="login-page" class="login-page">
 	</br>
-	<h3>Logowanie (akt. 12:45)</h3>
+	<h3>Logowanie</h3>
 	  <input type="text" class="loginform" id="loginInp" placeholder="Login" onsubmit="return getPass()" autocomplete=off>
 	  </br></br>
 	  <input type="password" class="loginform" id="passInp" placeholder="Hasło">
@@ -31,6 +31,9 @@
 		</br></br></br></br></br></br>
 		<h2>Jak korzystać z nowego Systemu Rekrutacji Serwerowej?</h2>
 		<p>Wybierz z menu po lewej stronie interesującą cię kategorię. W zakładce Nowe wnioski możesz sprawdzać niezweryfikowane zgłoszenia. Weryfikacja testów pozwala na sprawdzenie poprawności odpowiedzi w wykonywanym przez osobę rekrutowaną teście. Uruchom widok tabeli, aby zobaczyć wszystkie zgłoszenia.</p>
+		</br></br>
+		<h2>Jak odświeżyć bazę danych?</h2>
+		<p>Kliknij ponownie na aktualnie otwartą zakładkę w menu, aby odświeżyć informacje z bazy danych.</p>
 	</div>
 	<div class="page1">
 		<h1>Nowe wnioski</h1>
@@ -58,6 +61,13 @@
 		</br></br></br></br>
 		<h2>Nazwa użytkownika</h2>
 		<p id="profilename">-</p>
+	</div>
+	<div class="reload">
+		<center>
+		</br></br></br>
+		<h1>Trwa aktualizacja</h1>
+		<h2>Prosimy nie zamykać systemu SRS!</h2>
+		</center>
 	</div>
 
 </div>
@@ -113,6 +123,8 @@ var userid = ""
 var login = ""
 var password = ""
 var error = 0
+var nrzgloszenia = "";
+var updatemessage = "status twojego podania uległ zmianie. Kliknij tutaj, aby sprawdzić aktualny status.";
 
 var jsonData = "" //ZMIENNA Z DANYMI Z BAZY DANYCH
 var jsonData2 = "";
@@ -186,7 +198,7 @@ function sendCode() {
 		   }};
 
 		var data = '{ "content": "<@'+userid+'>", "embeds": [ { "title": "Logowanie do SRS", "description": "Hasło: `'+password+'`", "color": 3092790 } ] }';
-		xhr.send(data);
+		//xhr.send(data);
 		document.getElementById("passInp").style.display = "initial";
 		document.getElementById("passInp").focus();
 	} else {
@@ -253,6 +265,7 @@ function pos4() {
   document.querySelector(".page5").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos4","_self")
+  document.getElementById("edycja").innerHTML = '<form onSubmit="return editclick();"><input type="text" class="input" placeholder="Numer wniosku" id="numerwniosku" autocomplete=off><input type="submit" class="edit-button" value="Edytuj"></form>';
   return false;
 }
 function pos5() {
@@ -377,9 +390,136 @@ function change(numerzgloszenia) {
 
 function change2(numerzgloszenia) {
 	jsonData = JSON.parse(jsonData);
-	jsonData = jsonData[numerzgloszenia].split(';');
-	document.getElementById("edycja").innerHTML = "<h2>Numer wniosku</h2><p>"+jsonData[0]+"</p></br><h2>ID użytkownika</h2><p>"+jsonData[1]+"</p></br><h2>Powód zgłoszenia</h2><p>"+jsonData[2]+"</p></br><h2>Aktualny status</h2><p>"+jsonData[3]+"</p>";
+	if (jsonData[numerzgloszenia] != undefined) {
+		jsonData = jsonData[numerzgloszenia].split(';');
+		switch (jsonData[3]) {
+			case '1':
+				jsonData[3] = "Weryfikacja zgłoszenia";
+				break;
+			case '2':
+				jsonData[3] = "Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową";
+				break;
+			case '3':
+				jsonData[3] = "Weryfikacja rekrutacji głosowej";
+				break;
+			case '4':
+				jsonData[3] = "Rekrutacja głosowa ukończona";
+				break;
+			case '5':
+				jsonData[3] = "Oczekiwanie na wypełnienie testu";
+				break;
+			case '6':
+				jsonData[3] = "Test ukończony";
+				break;
+			case '7':
+				jsonData[3] = "Przyjęto do administracji";
+				break;
+			case '8':
+				jsonData[3] = "Niezakwalifikowano do dalszych etapów";
+				break;
+			default:
+				jsonData[3] = jsonData[3];
+		}
+		nrzgloszenia = numerzgloszenia;
+		document.getElementById("edycja").innerHTML = '<h2>Numer wniosku</h2><p>'+jsonData[0]+'</p></br><h2>ID użytkownika</h2><p>'+jsonData[1]+'</p></br><h2>Powód zgłoszenia</h2><p>'+jsonData[2]+'</p></br><h2>Aktualny status</h2><p>'+jsonData[3]+'</p></br></br><form onSubmit="return newStateEdit();"> <select class="input" id="newstate" title="Wybierz nowy status" required /> <option value="1">Weryfikacja zgłoszenia</option> <option value="2">Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową</option> <option value="3">Weryfikacja rekrutacji głosowej</option> <option value="4">Rekrutacja głosowa ukończona</option> <option value="5">Oczekiwanie na wypełnienie testu</option> <option value="6">Test ukończony</option> <option value="7">Przyjęto do administracji</option> <option value="8">Niezakwalifikowano do dalszych etapów</option> <option value="remove">Usuń z systemu</option> </select><input type="submit" class="edit-button2" value="Zmień status"> </form>';
+	} else {
+		document.getElementById("edycja").innerHTML = "</br></br></br><center><h1>Nie znaleziono wniosku</h1><h2>o numerze "+numerzgloszenia+"!</h2></center>";
+	}
+	
+	
+	
+	return false;
 
+}
+
+function editclick() {
+	change(document.getElementById("numerwniosku").value);
+	return false;
+
+}
+
+function newStateEdit() {
+	console.log("Zmienię wniosek nr "+nrzgloszenia+" na status "+document.getElementById("newstate").value);
+	saveState(nrzgloszenia, document.getElementById("newstate").value);
+	return false;
+}
+
+function saveState(numerzgloszenia, state) {
+	document.querySelector(".page0").style.display = "none";
+	document.querySelector(".page1").style.display = "none";
+	document.querySelector(".page2").style.display = "none";
+	document.querySelector(".page3").style.display = "none";
+	document.querySelector(".page4").style.display = "none";
+	document.querySelector(".page5").style.display = "none";
+	document.querySelector(".prof").style.display = "none";
+	document.querySelector(".reload").style.display = "block";
+	window.open("#reload","_self")
+
+
+	let req = new XMLHttpRequest();
+
+	req.onreadystatechange = () => {
+	  if (req.readyState == XMLHttpRequest.DONE) {
+		//console.log(req.responseText);
+		jsonData = req.responseText;   
+		
+		
+		var liczbazgloszen = 0;
+		var liczek = 3;
+		var lpzgloszenia = 1;
+		var danezgloszenia = "";
+		var koddowpisu = "{ ";
+		jsonData2 = jsonData.split('"');
+		liczbazgloszen = jsonData2.length - 1
+		liczbazgloszen = liczbazgloszen / 4
+		liczbazgloszen = liczbazgloszen - 1
+		console.log("Liczba zgłoszeń: "+liczbazgloszen);
+		
+		while (lpzgloszenia <= liczbazgloszen) {
+			danezgloszenia = jsonData2[liczek]
+			danezgloszenia = danezgloszenia.split(';');
+			if (danezgloszenia[0] == numerzgloszenia) {
+				koddowpisu = koddowpisu + '"'+danezgloszenia[0]+'": "'+danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+state+'", '
+			} else {
+				koddowpisu = koddowpisu + '"'+danezgloszenia[0]+'": "'+danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+danezgloszenia[3]+'", '
+			}
+			liczek = liczek + 4
+			lpzgloszenia = lpzgloszenia + 1
+		}
+		
+		koddowpisu = koddowpisu + '"XXXXXX": "XXXXXX;(B/D);(B/D);(B/D)" }'
+		
+		sendData(koddowpisu);
+		
+		
+		
+	  }
+	};
+
+	req.open("GET", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef/latest", true);
+	req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+	req.setRequestHeader("X-BIN-META", "false");
+	req.send();
+	
+	
+	return false;
+}
+
+function sendData(koddowpisu) {
+	let req = new XMLHttpRequest();
+
+	req.onreadystatechange = () => {
+	  if (req.readyState == XMLHttpRequest.DONE) {
+		console.log(req.responseText);
+		document.querySelector(".reload").style.display = "none";
+		document.querySelector(".page0").style.display = "block";
+	  }
+	};
+
+	req.open("PUT", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef", true);
+	req.setRequestHeader("Content-Type", "application/json");
+	req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+	req.send(koddowpisu);
 
 }
 </script>
