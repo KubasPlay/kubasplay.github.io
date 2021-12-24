@@ -207,7 +207,7 @@ table thead th {
 table tfoot td {
   font-size: 14px;
 }
-tr:hover{
+.tabelka-row:hover{
 	background-color: #f9f9f9;
 	cursor: pointer;
 }
