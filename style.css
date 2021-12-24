@@ -180,21 +180,6 @@ a{
 .loginform:focus {
 	outline:none;
 }
-::-webkit-input-placeholder {
-   text-align: center;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   text-align: center;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   text-align: center;  
-}
-
-:-ms-input-placeholder {  
-   text-align: center; 
-}
 table.tabelka {
   border: 2px solid #FFFFFF;
   text-align: left;
@@ -225,4 +210,19 @@ table.tabelka tfoot td {
 .tabelka-row:hover{
 	background-color: #f9f9f9;
 	cursor: pointer;
+}
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
 }
