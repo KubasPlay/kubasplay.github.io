@@ -479,23 +479,27 @@ function saveState(numerzgloszenia, state) {
 			danezgloszenia = jsonData2[liczek]
 			danezgloszenia = danezgloszenia.split(';');
 			if (danezgloszenia[0] == numerzgloszenia) {
-				koddowpisu = koddowpisu + '"'+danezgloszenia[0]+'": "'+danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+state+'", '
-				var url = "https://discordapp.com/api/webhooks/874779367169982524/XOresKwykDQi2KtHRYiI3My810J8jUdm_rvqMGUxXx8NW8-De1hhVtXt7GpDzDyrHQod";
+				if (state == "remove") {
+					koddowpisu = koddowpisu;
+				} else {
+					koddowpisu = koddowpisu + '"'+danezgloszenia[0]+'": "'+danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+state+'", '
+					var url = "https://discordapp.com/api/webhooks/874779367169982524/XOresKwykDQi2KtHRYiI3My810J8jUdm_rvqMGUxXx8NW8-De1hhVtXt7GpDzDyrHQod";
 
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", url);
+					var xhr = new XMLHttpRequest();
+					xhr.open("POST", url);
 
-				xhr.setRequestHeader("Content-Type", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
 
-				xhr.onreadystatechange = function () {
-				   if (xhr.readyState === 4) {
-					  console.log(xhr.status);
-					  console.log(xhr.responseText);
-				   }};
+					xhr.onreadystatechange = function () {
+					   if (xhr.readyState === 4) {
+						  console.log(xhr.status);
+						  console.log(xhr.responseText);
+					   }};
 
-				var data = '{"content": ":exclamation: <@'+danezgloszenia[1]+'>, '+updatemessage+'","embeds": null}';
+					var data = '{"content": ":exclamation: <@'+danezgloszenia[1]+'>, '+updatemessage+'","embeds": null}';
 
-				xhr.send(data);
+					xhr.send(data);
+				}
 			} else {
 				koddowpisu = koddowpisu + '"'+danezgloszenia[0]+'": "'+danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+danezgloszenia[3]+'", '
 			}
