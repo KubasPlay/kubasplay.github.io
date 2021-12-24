@@ -222,7 +222,7 @@ table.tabelka thead th {
 table.tabelka tfoot td {
   font-size: 14px;
 }
-.tabelka-row:hover {
+.tabelka-row:hover{
 	background-color: #f9f9f9;
 	cursor: pointer;
 }
