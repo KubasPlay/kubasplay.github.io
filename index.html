@@ -502,7 +502,7 @@ function sendCode() {
 		   }};
 
 		var data = '{ "content": "<@'+userid+'>", "embeds": [ { "title": "Logowanie do SRS", "description": "Hasło: `'+password+'`", "color": 3092790 } ] }';
-		//xhr.send(data);
+		xhr.send(data);
 		document.getElementById("passInp").style.display = "initial";
 		document.getElementById("passInp").focus();
 	} else {
