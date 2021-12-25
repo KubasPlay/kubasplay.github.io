@@ -352,6 +352,9 @@ table tfoot td {
 	</div>
 	<div class="page5">
 		<h1>Statystyki</h1>
+		</br>
+		<div id="statystyki">
+		</div>
 	</div>
 	<div class="prof">
 		<h1>Profil</h1>
@@ -606,6 +609,7 @@ function pos5() {
   document.querySelector(".page5").style.display = "block";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos5","_self")
+  makeStats();
   return false;
 }
 function prof() {
@@ -695,6 +699,56 @@ function loadNewZgl2() {
 	//console.log(tabelunia);
 
 
+
+}
+
+function makeStats() {
+	document.getElementById("statystyki").innerHTML = "</br></br></br><center><h1>Tworzenie statystyk</h1><h2>Proszę czekać...</h2></center>";
+	let req = new XMLHttpRequest();
+
+	req.onreadystatechange = () => {
+	  if (req.readyState == XMLHttpRequest.DONE) {
+		//console.log(req.responseText);
+		jsonData = req.responseText;   
+		makeStats2();
+	  }
+	};
+
+	req.open("GET", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef/latest", true);
+	req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+	req.setRequestHeader("X-BIN-META", "false");
+	req.send();
+	
+	return false;
+}
+
+function makeStats2() {
+	var stats = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+	
+	var liczbazgloszen = 0;
+	var liczek = 3;
+	var lpzgloszenia = 1;
+	var danezgloszenia = "";
+	var akceptacja = "";
+	var odrzucenie = "";
+	jsonData2 = jsonData.split('"');
+	liczbazgloszen = jsonData2.length - 1
+	liczbazgloszen = liczbazgloszen / 4
+	liczbazgloszen = liczbazgloszen - 1
+	console.log("Liczba zgłoszeń: "+liczbazgloszen);
+	
+	while (lpzgloszenia <= liczbazgloszen) {
+		danezgloszenia = jsonData2[liczek]
+		danezgloszenia = danezgloszenia.split(';');
+		stats[parseInt(danezgloszenia[3])] = stats[parseInt(danezgloszenia[3])] + 1;
+		liczek = liczek + 4
+		lpzgloszenia = lpzgloszenia + 1
+	}
+	
+	stats[0] = stats[1] + stats[2] + stats[3] + stats[4] + stats[5] + stats[6] + stats[7] + stats[8];
+	
+	console.log(stats);
+	document.getElementById("statystyki").innerHTML = "<h2>Zgłoszeń łącznie: "+stats[0]+"</h2><p>Weryfikacja zgłoszenia: "+stats[1]+"</p><p>Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową: "+stats[2]+"</p><p>Weryfikacja rekrutacji głosowej: "+stats[3]+"</p><p>Rekrutacja głosowa ukończona: "+stats[4]+"</p><p>Oczekiwanie na wypełnienie testu: "+stats[5]+"</p><p>Test ukończony: "+stats[6]+"</p><p>Przyjęto do administracji: "+stats[7]+"</p><p>Niezakwalifikowano do dalszych etapów: "+stats[8]+"</p>";
 
 }
 

@@ -88,7 +88,7 @@ p{
 	color: white;
 	margin-left: 5px;
     vertical-align: middle;
-	transition: opacity 0.09s ease-out;
+	transition: opacity 0.05s ease-out;
 }
 .menu:hover .menu-content{
 	opacity: 1;
