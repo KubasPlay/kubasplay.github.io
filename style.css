@@ -38,6 +38,22 @@ h3{
 	color: white;
 	font-weight: normal;
 }
+h4{
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: Lato;
+	font-size: 27px;
+	color: white;
+	font-weight: normal;
+}
+h5{
+	margin-top: 5px;
+	margin-bottom: 0;
+	font-family: Lato;
+	font-size: 20px;
+	color: white;
+	font-weight: normal;
+}
 p{
 	margin-top: 0;
 	margin-bottom: 0;
@@ -148,16 +164,7 @@ a{
 	-moz-box-shadow:0px 0px 50px 8px #636363 ;
 	box-shadow:0px 0px 50px 8px #636363 ;
 	padding-top: 10%;
-}
-.login-page2 {
-	width: 500px;
-	height: 100%;
-	text-align: center;
-	background-color: #1e6c93; 
-	-webkit-box-shadow:0px 0px 50px 8px #636363 ;
-	-moz-box-shadow:0px 0px 50px 8px #636363 ;
-	box-shadow:0px 0px 50px 8px #636363 ;
-	padding-top: 10%;
+	position: fixed;
 }
 .loginform {
 	width: 75%;
@@ -245,4 +252,40 @@ table tfoot td {
 .tabelka-row:hover{
 	background-color: #f9f9f9;
 	cursor: pointer;
+}
+.new-zgl {
+	border-radius:10px 10px 0px 0px;
+	-moz-border-radius:10px 10px 0px 0px;
+	-webkit-border-radius:10px 10px 0px 0px;
+	border-top: 2px solid #363636;
+	border-left: 2px solid #363636;
+	border-right: 2px solid #363636;
+	font-size: 20px;
+	padding-left: 5px;
+	background-color: #1e6c93;
+	color: white;
+	margin-right: 25px;
+	padding: 10px;
+	height: 140px;
+}
+.new-zgl-control {
+	border-radius:0px 0px 10px 10px;
+	-moz-border-radius:0px 0px 10px 10px;
+	-webkit-border-radius:0px 0px 10px 10px;
+	border-bottom: 2px solid #363636;
+	border-left: 2px solid #363636;
+	border-right: 2px solid #363636;
+	font-size: 20px;
+	padding-left: 5px;
+	background-color: #ffffff;
+	margin-right: 25px;
+	padding: 10px;
+	text-align: right;
+	font-family: Lato;
+	font-size: 30px;
+	color: black;
+	font-weight: normal;
+}
+.new-zgl-control-img {
+	cursor: pointer;	
 }

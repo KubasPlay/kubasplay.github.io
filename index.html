@@ -10,8 +10,8 @@
 <body>
 
 <div id="err-login-page" class="login-page">
-	</br></br></br>
-	<h1>Błędny login/hasło!</h1>
+	</br>
+	<h3>Błędny login/hasło!</h3>
 </div>
 
 <div id="login-page" class="login-page">
@@ -20,7 +20,6 @@
 	  <input type="text" class="loginform" id="loginInp" placeholder="Login" onsubmit="return getPass()" autocomplete=off>
 	  </br></br>
 	  <input type="password" class="loginform" id="passInp" placeholder="Hasło">
-	  </br></br>
 </div>
 
 <div id="content" class="content">
@@ -39,6 +38,9 @@
 	</div>
 	<div class="page1">
 		<h1>Nowe wnioski</h1>
+		</br>
+		<div id="nowe-wnioski">
+		</div>
 	</div>
 	<div class="page2">
 		<h1>Weryfikacja testów</h1>
@@ -87,7 +89,7 @@
 		<span class="menu-content">Wyloguj</span>
 	</div>
 	<hr class="profile-hr"></hr>
-	<div class="menu-pos" id="pos1" onClick="return pos1()" style="display: none;">
+	<div class="menu-pos" id="pos1" onClick="return pos1()">
 		<div class="menu-icon">
 			<img src="https://i.imgur.com/w2WMos7.png" width="40px"></img>
 		</div>
@@ -142,7 +144,8 @@ document.getElementById("menu").style.display = "none";
 document.getElementById("err-login-page").style.display = "none";
 document.getElementById("content").style.display = "none";
 document.getElementById("passInp").style.display = "none";
-//document.getElementById("submitLogin").style.visibility = "hidden";
+
+
 document.getElementById("loginInp")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -211,7 +214,7 @@ function sendCode() {
 		document.getElementById("passInp").focus();
 	} else {
 		document.getElementById("login-page").style.display = "none";
-		document.getElementById("err-login-page").style.display = "initial";
+		document.getElementById("err-login-page").style.display = "inherit";
 	}
 	return false;
 }
@@ -239,6 +242,7 @@ function pos1() {
   document.querySelector(".page5").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos1","_self")
+  loadNewZgl();
   return false;
 }
 function pos2() {
@@ -298,6 +302,87 @@ function prof() {
   window.open("#prof","_self")
   return false;
 }
+
+function loadNewZgl() {
+	document.getElementById("nowe-wnioski").innerHTML = "</br></br></br><center><h1>Pobieranie wniosków</h1><h2>Proszę czekać...</h2></center>";
+	let req = new XMLHttpRequest();
+
+	req.onreadystatechange = () => {
+	  if (req.readyState == XMLHttpRequest.DONE) {
+		//console.log(req.responseText);
+		jsonData = req.responseText;   
+		loadNewZgl2();
+	  }
+	};
+
+	req.open("GET", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef/latest", true);
+	req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+	req.setRequestHeader("X-BIN-META", "false");
+	req.send();
+	
+	return false;
+
+}
+
+function loadNewZgl2() {
+
+	//<div style="display: inline-block; margin-top: 25px; width: 800px;">
+	//	<div class="new-zgl">
+	//		<h4>ID użytkownika</h4>
+	//		<h5>Powód zgłoszenia</h5>
+	//	</div>
+	//	<div class="new-zgl-control">
+	//		<img class="new-zgl-control-img" src="https://i.imgur.com/BDuMfIg.png" height="40px" title="Zaakceptuj zgłoszenie" onClick='saveState("995615", "2");'>   <img class="new-zgl-control-img" src="https://i.imgur.com/OFVCR1T.png" height="40px" title="Odrzuć zgłoszenie" onClick='saveState("995615", "8");'>
+	//	</div>
+	//</div>
+	
+	
+	var tabelunia = "";
+	var liczbazgloszen = 0;
+	var liczek = 3;
+	var lpzgloszenia = 1;
+	var danezgloszenia = "";
+	var akceptacja = "";
+	var odrzucenie = "";
+	jsonData2 = jsonData.split('"');
+	liczbazgloszen = jsonData2.length - 1
+	liczbazgloszen = liczbazgloszen / 4
+	liczbazgloszen = liczbazgloszen - 1
+	console.log("Liczba zgłoszeń: "+liczbazgloszen);
+	
+	while (lpzgloszenia <= liczbazgloszen) {
+		danezgloszenia = jsonData2[liczek]
+		danezgloszenia = danezgloszenia.split(';');
+		switch (danezgloszenia[3]) {
+			case '1':
+				akceptacja = 'saveState("'+danezgloszenia[0]+'", "2");'
+				odrzucenie = 'saveState("'+danezgloszenia[0]+'", "8");'
+				tabelunia = tabelunia + '<div style="display: inline-block; margin-top: 25px; width: 800px;"> <div class="new-zgl"> <h4>ID: '+danezgloszenia[1]+'</h4> <h5>'+danezgloszenia[2]+'</h5> </div> <div class="new-zgl-control"> <img class="new-zgl-control-img" src="https://i.imgur.com/BDuMfIg.png" height="40px" title="Zaakceptuj zgłoszenie" ' + "onClick='"+akceptacja+"'>" + '<img class="new-zgl-control-img" src="https://i.imgur.com/OFVCR1T.png" height="40px" title="Odrzuć zgłoszenie" ' + "onClick='"+odrzucenie+"'>" + ' </div> </div>';
+				break;
+			default:
+				danezgloszenia[3] = danezgloszenia[3];
+		}
+		liczek = liczek + 4
+		lpzgloszenia = lpzgloszenia + 1
+	}
+	
+	
+	if (tabelunia == "") {
+		document.getElementById("nowe-wnioski").innerHTML = "</br></br></br><center><h1>Brak nowych wniosków!</h1>";
+	} else {
+		document.getElementById("nowe-wnioski").innerHTML = tabelunia;
+	}
+	
+	
+	jsonData = JSON.parse(jsonData);
+	//console.log(tabelunia);
+
+
+
+}
+
+
+
 function createTable() {
 	document.getElementById("tabelka").innerHTML = "</br></br></br><center><h1>Generowanie tabeli</h1><h2>Proszę czekać...</h2></center>";
 	let req = new XMLHttpRequest();
@@ -448,7 +533,7 @@ function editclick() {
 
 function newStateEdit() {
 	console.log("Zmienię wniosek nr "+nrzgloszenia+" na status "+document.getElementById("newstate").value);
-	saveState(nrzgloszenia, document.getElementById("newstate").value);
+	saveState(nrzgloszenia, document.getElementById("newstate").value, "page3");
 	return false;
 }
 
