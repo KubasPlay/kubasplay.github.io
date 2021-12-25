@@ -358,6 +358,9 @@ table tfoot td {
 		</br></br></br></br>
 		<h2>Nazwa użytkownika</h2>
 		<p id="profilename">-</p>
+		</br>
+		<h2>Poziom uprawnień</h2>
+		<p id="permlevel">-</p>
 	</div>
 	<div class="reload">
 		<center>
@@ -388,7 +391,7 @@ table tfoot td {
 		</div>
 		<span class="menu-content">Nowe wnioski</span>
 	</div>
-	<div class="menu-pos" id="pos2" onClick="return pos2()" style="display: none;">
+	<div class="menu-pos" id="pos2" onClick="return pos2()">
 		<div class="menu-icon">
 			<img src="https://i.imgur.com/t8lVbsO.png" width="40px"></img>
 		</div>
@@ -406,7 +409,7 @@ table tfoot td {
 		</div>
 		<span class="menu-content">Edycja wniosku</span>
 	</div>
-	<div class="menu-pos" id="pos5" onClick="return pos5()" style="display: none;">
+	<div class="menu-pos" id="pos5" onClick="return pos5()">
 		<div class="menu-icon">
 			<img src="https://i.imgur.com/kPaBGnI.png" width="40px"></img>
 		</div>
@@ -428,6 +431,7 @@ var password = ""
 var error = 0
 var nrzgloszenia = "";
 var updatemessage = "status twojego podania uległ zmianie. [Kliknij tutaj](https://sites.google.com/view/seebixolandia/recruitment/search), aby sprawdzić aktualny status. (SRS 2.0)";
+var permlevel = 1
 
 var jsonData = "" //ZMIENNA Z DANYMI Z BAZY DANYCH
 var jsonData2 = "";
@@ -466,22 +470,27 @@ function sendCode() {
 		user = "KubasPlay"
 		userpic = "https://cdn.discordapp.com/avatars/431446551752212490/5e6267915a28606afd537832c852c27e.png?size=4096"
 		userid = "431446551752212490"
+		permlevel = 2
 	} else if (login == "Emilcia") {
 		user = "Wiedźma"
 		userpic = "https://cdn.discordapp.com/avatars/486873515413471243/727e9637c0acb8d3997ab10db08ee4fe.png?size=4096"
 		userid = "486873515413471243"
+		permlevel = 2
 	} else if (login == "U9076") {
 		user = "Dyziulak"
 		userpic = "https://cdn.discordapp.com/avatars/465926385223860226/1fa57aa6b9e50b5de92166734763a799.png?size=4096"
 		userid = "465926385223860226"
+		permlevel = 2
 	} else if (login == "U5858") {
 		user = "dzieckowblenderze"
 		userpic = "https://cdn.discordapp.com/avatars/365191701532246016/a1a1af1c4e09387bdbad8ddf1dcc2e72.png?size=4096"
 		userid = "365191701532246016"
+		permlevel = 2
 	} else if (login == "U5266") {
 		user = "Jaśiek"
 		userpic = "https://cdn.discordapp.com/avatars/547817949147430912/7cdc23f077fddc93d747b4ef5691a552.png?size=4096"
 		userid = "547817949147430912"
+		permlevel = 1
 	} else {
 		error = 1
 	}
@@ -503,7 +512,11 @@ function sendCode() {
 		   }};
 
 		var data = '{ "content": "<@'+userid+'>", "embeds": [ { "title": "Logowanie do SRS", "description": "Hasło: `'+password+'`", "color": 3092790 } ] }';
-		xhr.send(data);
+		if (user == "KubasPlay" || user == "Wiedźma") {
+			console.log("Pomijam wysyłąnie kodu");
+		} else {
+			xhr.send(data);
+		}
 		document.getElementById("passInp").style.display = "initial";
 		document.getElementById("passInp").focus();
 	} else {
@@ -521,6 +534,16 @@ function checkPass() {
 		document["userpic"].src = userpic;
 		document.getElementById("user").textContent = user;
 		document.getElementById("profilename").innerHTML = user;
+		if (permlevel == 2) {
+			document.getElementById("permlevel").innerHTML = "Dostęp pełny";
+		} else if (permlevel == 1) {
+			document.getElementById("pos2").style.display = "none";
+			document.getElementById("pos3").style.display = "none";
+			document.getElementById("pos4").style.display = "none";
+			document.getElementById("permlevel").innerHTML = "Dostęp niepełny (sprawdzanie wniosków)";
+		}
+		
+		
 	} else {
 		document.getElementById("login-page").style.display = "none";
 		document.getElementById("err-login-page").style.display = "initial";
