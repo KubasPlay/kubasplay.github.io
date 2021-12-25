@@ -490,6 +490,11 @@ function sendCode() {
 		userpic = "https://cdn.discordapp.com/avatars/365191701532246016/a1a1af1c4e09387bdbad8ddf1dcc2e72.png?size=4096"
 		userid = "365191701532246016"
 		permlevel = 2
+	} else if (login == "U8996") {
+		user = "Magmann"
+		userpic = "https://cdn.discordapp.com/avatars/827676077929005077/06a28711f60c142edd1a6604ac1010ad.png?size=4096"
+		userid = "827676077929005077"
+		permlevel = 2
 	} else if (login == "U5266") {
 		user = "Jaśiek"
 		userpic = "https://cdn.discordapp.com/avatars/547817949147430912/7cdc23f077fddc93d747b4ef5691a552.png?size=4096"
@@ -498,6 +503,8 @@ function sendCode() {
 	} else {
 		error = 1
 	}
+	
+	
 	
 	if (error != 1) {
 		password = Math.floor(Math.random() * (999999 - 111111 + 1)) + 111111;
