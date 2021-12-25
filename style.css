@@ -284,5 +284,12 @@ table tfoot td {
 	font-weight: normal;
 }
 .new-zgl-control-img {
-	cursor: pointer;	
+	cursor: pointer;
+	transform: scale(1);
+	transition: transform ease 0.08s;
+}
+.new-zgl-control-img:hover {
+	cursor: pointer;
+	transform: scale(0.8);
+	transition: transform ease 0.5s;
 }
