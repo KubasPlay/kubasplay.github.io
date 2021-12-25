@@ -160,9 +160,6 @@ a{
 	height: 100%;
 	text-align: center;
 	background-color: #1e6c93; 
-	-webkit-box-shadow:0px 0px 50px 8px #636363 ;
-	-moz-box-shadow:0px 0px 50px 8px #636363 ;
-	box-shadow:0px 0px 50px 8px #636363 ;
 	padding-top: 10%;
 	position: fixed;
 }
