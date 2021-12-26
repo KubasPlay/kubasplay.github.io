@@ -1,0 +1,328 @@
+<html>
+<head>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+.css-input {
+     padding: 17px;
+     font-size: 17px;
+     border-width: 0px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: hidden;
+     border-radius: 12px;
+     box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+     text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+	 width: 75%;
+}
+.css-input:focus {
+     outline:none;
+}
+.css-button {
+     padding: 17px;
+     font-size: 17px;
+     border-width: 0px;
+     border-color: #CCCCCC;
+     background-color: #1e6c93;
+     color: #ffffff;
+     border-style: hidden;
+     border-radius: 12px;
+     box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+     text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+	 width: 75%;
+}
+.css-button:focus {
+     outline:none;
+}
+h1 {
+	font-family: 'Lato', sans-serif;
+	font-size: 50px;
+	color: #1e6c93;
+	margin: 0px;
+}
+h2 {
+	font-family: 'Lato', sans-serif;
+	font-size: 30px;
+	color: #1e6c93;
+	margin: 0px;
+}
+</style>
+<center>
+</br></br>
+<h1>Sprawdzanie testów</h1>
+<h2>Wklej kod odpowiedzi, aby kontynuować</h2>
+</br>
+<form name="search" onsubmit="return checkCode()" >
+	<input type="text" class="css-input" name="inputcode" title="Wprowadź kod odpowiedzi" placeholder="Kod odpowiedzi" required />
+	<br>
+	<br>
+	<input type="submit" name="Submit" class="css-button" value="Przejdź do sprawdzania"/>
+</form>
+
+</center>
+</body>
+</html>
+
+
+<script>
+	var inputowyklucz = "";
+	var startingcode = "<html> <head> <style> h1 { font-family: 'Lato', sans-serif; font-size: 50px; color: #1e6c93; margin: 0px; } h2 { font-family: 'Lato', sans-serif; font-size: 30px; color: #1e6c93; margin: 0px; } h3 { font-family: 'Lato', sans-serif; font-size: 20px; color: #1e6c93; margin: 0px; } p { font-family: 'Lato', sans-serif; font-size: 15px; color: #808080; margin: 0px; cursor: pointer; } a { text-decoration: none; } .form-input { padding: 17px; font-size: 17px; border-width: 0px; border-color: #CCCCCC; background-color: #FFFFFF; color: #000000; border-style: none; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); width: 50%; height: 60px; } .form-input:focus { outline:none; } .form-input2 { padding: 17px; font-size: 17px; border-width: 0px; border-color: #CCCCCC; background-color: #FFFFFF; color: #000000; border-style: none; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); width: 60px; height: 60px; } .form-input2:focus { outline:none; } </style> </head> <body>";
+	var numerzgloszenia = "";
+	var kodp = "";
+	var wynik = 0;
+	var wynikopen = 0;
+	var myObj = "";
+	var zmienionykod = "";
+	var pointscode = ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x"]
+	var answercode = "";
+	var testid = "";
+	
+	function checkCode() {
+		inputowyklucz = document.getElementsByName('inputcode')[0].value;
+		inputowyklucz = inputowyklucz.split(':')
+		numerzgloszenia = inputowyklucz[0]
+		testid = numerzgloszenia
+		document.write(startingcode);
+		document.write("</br><h1>Sprawdzanie testu</h1><h2>nr "+numerzgloszenia+"</h2>");
+		kodp = inputowyklucz[1].slice(1);
+		answercode = kodp
+		kodp = kodp.split(';');
+		console.log(answercode);
+		document.write("</br>");
+		
+		//Pytania zamknięte: 0, 1, 2, 10, 11, 12, 13, 14, 15
+		//Pytania otwarte: 3, 4, 5, 6, 7, 8, 9
+		//b;a;c;!modlogs;!mute;!kick;!warnings;!ban;!warn;!unwarn;a;c;a;b;a;d
+		
+		if (kodp[0] == "b") {
+			wynik = wynik + 5
+			pointscode[1] = "v"
+		} else {
+			pointscode[1] = "x"
+		}
+		if (kodp[1] == "a") {
+			wynik = wynik + 5
+			pointscode[2] = "v"
+		} else {
+			pointscode[2] = "x"
+		}
+		if (kodp[2] == "c") {
+			wynik = wynik + 5
+			pointscode[3] = "v"
+		} else {
+			pointscode[3] = "x"
+		}
+		if (kodp[10] == "a") {
+			wynik = wynik + 5
+			pointscode[11] = "v"
+		} else {
+			pointscode[11] = "x"
+		}
+		if (kodp[11] == "c") {
+			wynik = wynik + 5
+			pointscode[12] = "v"
+		} else {
+			pointscode[12] = "x"
+		}
+		if (kodp[12] == "a") {
+			wynik = wynik + 10
+			pointscode[13] = "v"
+		} else {
+			pointscode[13] = "x"
+		}
+		if (kodp[13] == "b") {
+			wynik = wynik + 10
+			pointscode[14] = "v"
+		} else {
+			pointscode[14] = "x"
+		}
+		if (kodp[14] == "a") {
+			wynik = wynik + 10
+			pointscode[15] = "v"
+		} else {
+			pointscode[15] = "x"
+		}
+		if (kodp[15] == "d") {
+			wynik = wynik + 10
+			pointscode[16] = "v"
+		} else {
+			pointscode[16] = "x"
+		}
+		
+		
+		document.write("<h3>Pytania zamknięte: "+wynik+" pkt.</h3></br><h3>Odpowiedzi w pyt. otw.:</h3>");
+		document.write("<h3>!modlogs - "+kodp[3]+'<input type="checkbox" onchange="return updatePoints()" id="que4" value="v"></h3>');
+		document.write("<h3>!mute - "+kodp[4]+'<input type="checkbox" onchange="return updatePoints()" id="que5" value="v"></h3>');
+		document.write("<h3>!kick - "+kodp[5]+'<input type="checkbox" onchange="return updatePoints()" id="que6" value="v"></h3>');
+		document.write("<h3>!warnings - "+kodp[6]+'<input type="checkbox" onchange="return updatePoints()" id="que7" value="v"></h3>');
+		document.write("<h3>!ban - "+kodp[7]+'<input type="checkbox" onchange="return updatePoints()" id="que8" value="v"></h3>');
+		document.write("<h3>!warn - "+kodp[8]+'<input type="checkbox" onchange="return updatePoints()" id="que9" value="v"></h3>');
+		document.write("<h3>!unwarn - "+kodp[9]+'<input type="checkbox" onchange="return updatePoints()" id="que10" value="v"></h3>');
+		document.write("</br></br>");
+		//document.write('<h2>Poprawnych odp. w pyt. otw.:  <input type="text" onchange="updatePoints()" class="form-input2" name="openq" title="Wprowadź ilość prawidłowych odpowiedzi w pytaniach otwartych" autocomplete="off" required /></h2>');
+		document.write('<h2 id="wynikupdating">Przyznam: '+wynik+' pkt.</h2>');
+		document.write('</br><input type="submit" onclick="sendPoints()" value="Zatwierdź">');
+		
+		return false;
+	
+	}
+	
+	function updatePoints() {
+		wynikopen = 0;
+		if (document.getElementById("que4").checked) {
+			wynikopen = wynikopen + 5
+			pointscode[4] = "v"
+		} else {
+			pointscode[4] = "x"
+		}
+		if (document.getElementById("que5").checked) {
+			wynikopen = wynikopen + 5
+			pointscode[5] = "v"
+		} else {
+			pointscode[5] = "x"
+		}
+		if (document.getElementById("que6").checked) {
+			wynikopen = wynikopen + 5
+			pointscode[6] = "v"
+		} else {
+			pointscode[6] = "x"
+		}
+		if (document.getElementById("que7").checked) {
+			wynikopen = wynikopen + 5
+			pointscode[7] = "v"
+		} else {
+			pointscode[7] = "x"
+		}
+		if (document.getElementById("que8").checked) {
+			wynikopen = wynikopen + 5
+			pointscode[8] = "v"
+		} else {
+			pointscode[8] = "x"
+		}
+		if (document.getElementById("que9").checked) {
+			wynikopen = wynikopen + 5
+			pointscode[9] = "v"
+		} else {
+			pointscode[9] = "x"
+		}
+		if (document.getElementById("que10").checked) {
+			wynikopen = wynikopen + 5
+			pointscode[10] = "v"
+		} else {
+			pointscode[10] = "x"
+		}
+		wynikopen = wynikopen + wynik
+		document.getElementById("wynikupdating").innerHTML = "Przyznam: "+wynikopen+" pkt."
+		return false;
+	}
+	
+	function sendPoints() {
+		pointscode[0] = wynikopen
+		console.log(pointscode);
+		document.body.innerHTML = '';
+		document.write(startingcode);
+		document.write("</br><h2>Wysyłam...</h2>");
+		let req = new XMLHttpRequest();
+
+		req.onreadystatechange = () => {
+		  if (req.readyState == XMLHttpRequest.DONE) {
+			//console.log(req.responseText);
+			
+			myObj = req.responseText;
+			var kodjson = myObj.toString();
+			var myArr = kodjson.split('"');
+			var liczek = 3;
+			var wartosc = 1;
+			var database = "";
+			var completed = "no";
+			var statusdowpisania = "";
+			zmienionykod = "{";
+			console.log(myArr);
+			while (wartosc == 1) {
+				if (myArr[liczek] == undefined) {
+					wartosc = 0;
+				} else {
+					if (liczek > 3) {
+						zmienionykod = zmienionykod + ",";
+					}
+					database = myArr[liczek].split(';');
+					//database[0]: numer zgloszenia
+					//database[1]: ID uzytkownika
+					//database[2]: powod rekrutacji
+					//database[3]: status
+					statusdowpisania = database[3];
+					if (database[0] == numerzgloszenia) {
+						if (database[3] == "5") {
+							completed = "yes";
+							statusdowpisania = "6";
+						}
+						id = database[1];
+					}
+					console.log(myArr[liczek]);
+					database = myArr[liczek].split(';');
+					if (numerzgloszenia == database[0]) {
+						zmienionykod = zmienionykod + '"'+database[0]+'":"'+database[0]+';'+database[1]+';&test'+wynikopen+';'+database[3]+'"';
+					} else {
+						zmienionykod = zmienionykod + '"'+database[0]+'":"'+database[0]+';'+database[1]+';'+database[2]+';'+database[3]+'"';
+					}
+			
+				}
+				liczek = liczek + 4;
+			
+			}
+			zmienionykod = zmienionykod + "}"
+			console.log(zmienionykod);
+			let req1 = new XMLHttpRequest();
+
+			req1.onreadystatechange = () => {
+			  if (req.readyState == XMLHttpRequest.DONE) {
+				console.log(req1.responseText);
+				document.body.innerHTML = '';
+				document.write(startingcode);
+				document.write('</br><h2>Pomyślnie wysłano!</h2><p onclick="return makeResultDoc()">Generuj kod</p>');
+				console.log("tu sie konczy moja praca");
+				
+			  }
+			};
+
+			req1.open("PUT", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef", true);
+			req1.setRequestHeader("Content-Type", "application/json");
+			req1.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+			req1.send(zmienionykod);
+			
+		  }
+		};
+
+		req.open("GET", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef/latest", true);
+		req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+		req.setRequestHeader("X-BIN-META", "false");
+		req.send();
+	
+	}
+	
+	function makeResultDoc() {
+		pointscode = pointscode[0]+';'+pointscode[1]+';'+pointscode[2]+';'+pointscode[3]+';'+pointscode[4]+';'+pointscode[5]+';'+pointscode[6]+';'+pointscode[7]+';'+pointscode[8]+';'+pointscode[9]+';'+pointscode[10]+';'+pointscode[11]+';'+pointscode[12]+';'+pointscode[13]+';'+pointscode[14]+';'+pointscode[15]+';'+pointscode[16]
+		document.write('</br><input type="text" value="'+testid+": "+answercode+":"+pointscode+'" id="myInput" >');
+		
+		/* Get the text field */
+		  var copyText = document.getElementById("myInput");
+
+		  /* Select the text field */
+		  copyText.select();
+		  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+		   /* Copy the text inside the text field */
+		  navigator.clipboard.writeText(copyText.value);
+
+		  /* Alert the copied text */
+		  //window.open("https://sites.google.com/view/seebixolandia/recruitment/test/moreinfo","_blank")
+			document.write('<h2>Skopiuj powyższy kod</h2><a href="https://kubasplay.github.io/test-report.html" target="_blank"><h2>Kliknij tu, aby wygenerować raport</h2></a>');
+		
+		return false;
+	}
+	
+
+</script>

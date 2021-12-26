@@ -336,7 +336,10 @@ table tfoot td {
 		</div>
 	</div>
 	<div class="page2">
-		<h1>Weryfikacja testów</h1>
+		<h1>Testy</h1>
+		</br>
+		<div id="wyniki-testow">
+		</div>
 	</div>
 	<div class="page3">
 		<h1>Widok tabeli</h1>
@@ -398,7 +401,7 @@ table tfoot td {
 		<div class="menu-icon">
 			<img src="https://i.imgur.com/t8lVbsO.png" width="40px"></img>
 		</div>
-		<span class="menu-content">Wer. testów</span>
+		<span class="menu-content">Testy</span>
 	</div>
 	<div class="menu-pos" id="pos3" onClick="return pos3()">
 		<div class="menu-icon">
@@ -583,6 +586,7 @@ function pos2() {
   document.querySelector(".page5").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos2","_self")
+  testScore();
   return false;
 }
 function pos3() {
@@ -761,7 +765,72 @@ function makeStats2() {
 
 }
 
+function testScore() {
+	document.getElementById("wyniki-testow").innerHTML = "</br></br></br><center><h1>Pobieranie wyników testów</h1><h2>Proszę czekać...</h2></center>";
+	let req = new XMLHttpRequest();
 
+	req.onreadystatechange = () => {
+	  if (req.readyState == XMLHttpRequest.DONE) {
+		//console.log(req.responseText);
+		jsonData = req.responseText;   
+		testScore2();
+	  }
+	};
+
+	req.open("GET", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef/latest", true);
+	req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+	req.setRequestHeader("X-BIN-META", "false");
+	req.send();
+	
+	return false;
+
+
+}
+function testScore2() {
+	var tabelunia = '<table class="tabelka"><thead> <tr> <th>Numer zgłoszenia</th> <th>ID użytkownika</th> <th>Wynik testu</th> </tr> </thead> <tbody>';
+	var liczbazgloszen = 0;
+	var liczek = 3;
+	var lpzgloszenia = 1;
+	var danezgloszenia = "";
+	var czydosprawdzenia = "";
+	jsonData2 = jsonData.split('"');
+	liczbazgloszen = jsonData2.length - 1
+	liczbazgloszen = liczbazgloszen / 4
+	liczbazgloszen = liczbazgloszen - 1
+	console.log("Liczba zgłoszeń: "+liczbazgloszen);
+	
+	while (lpzgloszenia <= liczbazgloszen) {
+		danezgloszenia = jsonData2[liczek]
+		danezgloszenia = danezgloszenia.split(';');
+		czydosprawdzenia = "";
+		switch (danezgloszenia[3]) {
+			case '6':
+				if (danezgloszenia[2].startsWith('&test')) {
+					danezgloszenia[2] = danezgloszenia[2].substring(5);
+				}
+				if (danezgloszenia[2].endsWith('#')) {
+					czydosprawdzenia = 'style="background-color: #f7edda;"';
+					danezgloszenia[2] = danezgloszenia[2].slice(0, -1);
+				}
+				tabelunia = tabelunia + ' <tr class="tabelka-row"'+czydosprawdzenia+' onClick="return change('+danezgloszenia[0]+');"> <td>'+danezgloszenia[0]+'</td> <td>'+danezgloszenia[1]+'</td> <td>'+danezgloszenia[2]+'%</td> </tr>'
+				break;
+			default:
+				break;
+		}
+		liczek = liczek + 4
+		lpzgloszenia = lpzgloszenia + 1
+	}
+	
+	tabelunia = tabelunia + " </tbody> </table>";
+	if (tabelunia == '<table class="tabelka"><thead> <tr> <th>Numer zgłoszenia</th> <th>ID użytkownika</th> <th>Wynik testu</th> </tr> </thead> <tbody> </tbody> </table>') {
+		document.getElementById("wyniki-testow").innerHTML = "</br></br></br><center><h1>Brak wyników testów!</h1>";
+	} else {
+		document.getElementById("wyniki-testow").innerHTML = "<h2>Wyniki testów</h2></br>" + tabelunia + "</br><p>*Wyniki zaznaczone na żółto nie zostały sprawdzone</p>";
+	}
+	
+	return false;
+
+}
 
 function createTable() {
 	document.getElementById("tabelka").innerHTML = "</br></br></br><center><h1>Generowanie tabeli</h1><h2>Proszę czekać...</h2></center>";
@@ -894,7 +963,13 @@ function change2(numerzgloszenia) {
 				jsonData[3] = jsonData[3];
 		}
 		nrzgloszenia = numerzgloszenia;
-		document.getElementById("edycja").innerHTML = '<h2>Numer wniosku</h2><p>'+jsonData[0]+'</p></br><h2>ID użytkownika</h2><p>'+jsonData[1]+'</p></br><h2>Powód zgłoszenia</h2><p>'+jsonData[2]+'</p></br><h2>Aktualny status</h2><p>'+jsonData[3]+'</p></br></br><form onSubmit="return newStateEdit();"> <select class="input" id="newstate" title="Wybierz nowy status" required /> <option value="1">Weryfikacja zgłoszenia</option> <option value="2">Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową</option> <option value="3">Weryfikacja rekrutacji głosowej</option> <option value="4">Rekrutacja głosowa ukończona</option> <option value="5">Oczekiwanie na wypełnienie testu</option> <option value="6">Test ukończony</option> <option value="7">Przyjęto do administracji</option> <option value="8">Niezakwalifikowano do dalszych etapów</option> <option value="remove">Usuń z systemu</option> </select><input type="submit" class="edit-button2" value="Zmień status"> </form>';
+		if (jsonData[2].startsWith('&test')) {
+			jsonData[2] = jsonData[2].substring(5);
+			powodczywynik = "Wynik testu";
+		} else {
+			powodczywynik = "Powód zgłoszenia";
+		}
+		document.getElementById("edycja").innerHTML = '<h2>Numer wniosku</h2><p>'+jsonData[0]+'</p></br><h2>ID użytkownika</h2><p>'+jsonData[1]+'</p></br><h2>'+powodczywynik+'</h2><p>'+jsonData[2]+'</p></br><h2>Aktualny status</h2><p>'+jsonData[3]+'</p></br></br><form onSubmit="return newStateEdit();"> <select class="input" id="newstate" title="Wybierz nowy status" required /> <option value="1">Weryfikacja zgłoszenia</option> <option value="2">Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową</option> <option value="3">Weryfikacja rekrutacji głosowej</option> <option value="4">Rekrutacja głosowa ukończona</option> <option value="5">Oczekiwanie na wypełnienie testu</option> <option value="6">Test ukończony</option> <option value="7">Przyjęto do administracji</option> <option value="8">Niezakwalifikowano do dalszych etapów</option> <option value="remove">Usuń z systemu</option> </select><input type="submit" class="edit-button2" value="Zmień status"> </form>';
 	} else {
 		document.getElementById("edycja").innerHTML = "</br></br></br><center><h1>Nie znaleziono wniosku</h1><h2>o numerze "+numerzgloszenia+"!</h2></center>";
 	}
@@ -1018,6 +1093,7 @@ function sendData(koddowpisu) {
 }
 
 function sendUpdate(newData) {
+
 	var url = "https://discordapp.com/api/webhooks/924383608138006548/N-f1y9vtisB9AlNtEG2Rp5F8V4rbuXCyeJyK4V86kEZNcTAAlynx1VdIMK9uiJSL0AAb";
 
 	var xhr = new XMLHttpRequest();
@@ -1036,4 +1112,5 @@ function sendUpdate(newData) {
 	xhr.send(data);
 	return false;
 }
+
 </script>

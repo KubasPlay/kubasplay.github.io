@@ -1,0 +1,192 @@
+<html>
+<head>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+.css-input {
+     padding: 17px;
+     font-size: 17px;
+     border-width: 0px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: hidden;
+     border-radius: 12px;
+     box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+     text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+	 width: 75%;
+}
+.css-input:focus {
+     outline:none;
+}
+.css-button {
+     padding: 17px;
+     font-size: 17px;
+     border-width: 0px;
+     border-color: #CCCCCC;
+     background-color: #1e6c93;
+     color: #ffffff;
+     border-style: hidden;
+     border-radius: 12px;
+     box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+     text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+	 width: 75%;
+}
+.css-button:focus {
+     outline:none;
+}
+h1 {
+	font-family: 'Lato', sans-serif;
+	font-size: 50px;
+	color: #1e6c93;
+	margin: 0px;
+}
+h2 {
+	font-family: 'Lato', sans-serif;
+	font-size: 30px;
+	color: #1e6c93;
+	margin: 0px;
+}
+</style>
+<center>
+</br></br>
+<h1>Generowanie raportu testu</h1>
+<h2>Wklej kod odpowiedzi, aby kontynuować</h2>
+</br>
+<form name="search" onsubmit="return printMe()" >
+	<input type="text" class="css-input" name="answercode" title="Wprowadź kod odpowiedzi" placeholder="Kod odpowiedzi" required />
+	<br>
+	<br>
+	<input type="submit" name="Submit" class="css-button" value="Generuj raport"/>
+</form>
+
+</center>
+</body>
+</html>
+
+<script>
+
+
+function printMe() {
+	var answercode = document.getElementsByName("answercode")[0].value;
+	var pointscode = "";
+	answercode = answercode.split(':')
+	var testid = answercode[0]
+	pointscode = answercode[2]
+	liczek = 1
+	while (liczek < 21) {
+		pointscode = pointscode.replace("v", "✅");
+		pointscode = pointscode.replace("x", "❎");
+		console.log("robie to "+liczek+" raz....");
+		liczek = liczek + 1
+	}
+	
+	console.log(pointscode)
+	var qpop = pointscode.split(';');
+	answercode = answercode[1].split(';')
+	answercode[0] = answercode[0].substring(1)
+	console.log(answercode);
+	var q1 = ["", "", ""]
+	var q2 = ["", "", ""]
+	var q3 = ["", "", ""]
+	var q11 = ["", "", ""]
+	var q12 = ["", "", ""]
+	var q13 = ["", ""]
+	var q14 = ["", "", "", ""]
+	var q15 = ["", "", "", ""]
+	var q16 = ["", "", "", ""]
+	
+	if (answercode[0] == "a") {
+		q1 = ["selected", "", ""]
+	} else if (answercode[0] == "b") {
+		q1 = ["", "selected", ""]
+	} else if (answercode[0] == "c") {
+		q1 = ["", "", "selected"]
+	}
+	
+	if (answercode[1] == "a") {
+		q2 = ['checked="checked"', '', '']
+	} else if (answercode[1] == "b") {
+		q2 = ['', 'checked="checked"', '']
+	} else if (answercode[1] == "c") {
+		q2 = ['', '', 'checked="checked"']
+	}
+	
+	if (answercode[2] == "a") {
+		q3 = ['checked="checked"', '', '']
+	} else if (answercode[2] == "b") {
+		q3 = ['', 'checked="checked"', '']
+	} else if (answercode[2] == "c") {
+		q3 = ['', '', 'checked="checked"']
+	}
+	
+	if (answercode[10] == "a") {
+		q11 = ['checked="checked"', '', '']
+	} else if (answercode[10] == "b") {
+		q11 = ['', 'checked="checked"', '']
+	} else if (answercode[10] == "c") {
+		q11 = ['', '', 'checked="checked"']
+	}
+	
+	if (answercode[11] == "a") {
+		q12 = ['checked="checked"', '', '']
+	} else if (answercode[11] == "b") {
+		q12 = ['', 'checked="checked"', '']
+	} else if (answercode[11] == "c") {
+		q12 = ['', '', 'checked="checked"']
+	}
+	
+	if (answercode[12] == "a") {
+		q13 = ['checked="checked"', '']
+	} else if (answercode[12] == "b") {
+		q13 = ['', 'checked="checked"']
+	} 
+	
+	if (answercode[13] == "a") {
+		q14 = ['checked="checked"', '', '', '']
+	} else if (answercode[13] == "b") {
+		q14 = ['', 'checked="checked"', '', '']
+	} else if (answercode[13] == "c") {
+		q14 = ['', '', 'checked="checked"', '']
+	} else if (answercode[13] == "d") {
+		q14 = ['', '', '', 'checked="checked"']
+	}
+	
+	if (answercode[14] == "a") {
+		q15 = ['checked="checked"', '', '', '']
+	} else if (answercode[14] == "b") {
+		q15 = ['', 'checked="checked"', '', '']
+	} else if (answercode[14] == "c") {
+		q15 = ['', '', 'checked="checked"', '']
+	} else if (answercode[14] == "d") {
+		q15 = ['', '', '', 'checked="checked"']
+	}
+	
+	if (answercode[15] == "a") {
+		q16 = ['checked="checked"', '', '', '']
+	} else if (answercode[15] == "b") {
+		q16 = ['', 'checked="checked"', '', '']
+	} else if (answercode[15] == "c") {
+		q16 = ['', '', 'checked="checked"', '']
+	} else if (answercode[15] == "d") {
+		q16 = ['', '', '', 'checked="checked"'] 
+	}
+	
+	//201683: b;a;c;!modlogs;!mute;!kick;!warnings;!ban;!warn;!unwarn;a;c;a;b;a;d
+	//var qpop = ["X", "✅", "✅", "✅", "✅", "❎", "❎", "✅", "❎", "✅", "✅", "❎", "✅", "❎", "❎", "❎", "✅"]
+	var win = window.open("", "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes");
+	
+	win.document.body.innerHTML = '<html> <head> <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet"> </head> <body> <style> h1 { font-family: "Lato", sans-serif; font-size: 50px; color: #1e6c93; margin: 0px; } h2 { font-family: "Lato", sans-serif; font-size: 30px; color: #1e6c93; margin: 0px; } h3 { font-family: "Lato", sans-serif; font-size: 20px; color: #1e6c93; margin: 0px; } p { font-family: "Lato", sans-serif; font-size: 15px; color: #808080; margin: 0px; cursor: pointer; } a { text-decoration: none; } .starting-button { padding: 17px; font-size: 30px; border-width: 0px; border-color: #CCCCCC; background-color: #1e6c93; color: #ffffff; border-style: hidden; border-radius: 30px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); cursor: pointer; } .starting-button:focus { outline:none; } .form-input { padding: 17px; font-size: 17px; border-width: 0px; border-color: #CCCCCC; background-color: #FFFFFF; color: #000000; border-style: none; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); width: 300px; height: 60px; } .form-input:focus { outline:none; } .next-button { padding: 23px; font-size: 20px; border-width: 0px; border-color: #CCCCCC; background-color: #1e6c93; color: #ffffff; border-style: hidden; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); cursor: pointer; float: right; } .next-button:focus { outline:none; } .form-textarea { resize: none; overflow: hidden; padding: 17px; font-size: 17px; border-width: 0px; border-color: #CCCCCC; background-color: #FFFFFF; color: #000000; border-style: hidden; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); width: 40%; } .form-textarea:focus { outline:none; } .back-button { padding: 23px; font-size: 20px; border-width: 0px; border-color: #CCCCCC; background-color: #bfbfbf; color: #808080; border-style: hidden; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); cursor: pointer; float: left; } .back-button:focus { outline:none; } /* The container */ .container { display: block; position: relative; padding-left: 25px; margin-bottom: 12px; cursor: pointer; font-size: 22px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; font-family: "Lato", sans-serif; font-size: 17px; } </style>'+'<h1>Test rekrutacyjny</h1><h2>Wynik nr '+testid+'</h2><h2 style="text-align: right;">'+qpop[0]+'/100p.</h2></br></br></br></br><form onsubmit="return showResults()"> <h3>1. Z jakiego bota korzysta administracja na serwerze SEEBIXOLANDIA? '+qpop[1]+'</h3></br> <select name="q1" class="form-input" disabled> <option value="n" selected disabled hidden>- wybierz -</option> <option value="a" '+q1[0]+'>MEE6</option> <option value="b" '+q1[1]+'>Dyno</option> <option value="c" '+q1[2]+'>YAGPDB.xyz</option> </select> </br></br><h3 id="q2">2. Serwerowym prefixem stosowanym do bota wybranego w pytaniu nr 1 jest: '+qpop[2]+'</h3></br> <label class="container">! <input type="radio" id="q2a" name="q2" '+q2[0]+' disabled> <span class="checkmark"></span> </label> <label class="container">- <input type="radio" id="q2b" name="q2" '+q2[1]+' disabled> <span class="checkmark"></span> </label> <label class="container">? <input type="radio" id="q2c" name="q2" '+q2[2]+' disabled> <span class="checkmark"></span> </label> </br><h3>3. Która z poniższych komend służy do nadawania ostrzeżeń? '+qpop[3]+'</h3></br> <label class="container">kick <input type="radio" id="q3a" name="q3" '+q3[0]+' disabled> <span class="checkmark"></span> </label> <label class="container">notify <input type="radio" id="q3b" name="q3" '+q3[1]+' disabled> <span class="checkmark"></span> </label> <label class="container">warn <input type="radio" id="q3c" name="q3" '+q3[2]+' disabled> <span class="checkmark"></span> </label> </br><h3>4. Dzięki jakiej komendzie uzyskamy następujący rezultat? '+qpop[4]+'</h3> <a href="https://i.imgur.com/Zn7DnJ7.png" target="_blank"><p>Kliknij tutaj, aby wyświetlić zdjęcie</p></a></br> <input type="text" class="form-input" name="q4" title="Wprowadź komendę" value='+answercode[3]+' autocomplete="off" required disabled/> </br></br><h3>5. Za pomocą jakiej komendy możesz wyciszyć użytkownika? '+qpop[5]+'</h3></br> <input type="text" class="form-input" name="q5" title="Wprowadź komendę" autocomplete="off" value='+answercode[4]+' required disabled/> </br></br><h3>6. Za pomocą jakiej komendy możesz wyrzucić użytkownika z serwera? '+qpop[6]+'</h3></br> <input type="text" class="form-input" name="q6" title="Wprowadź komendę" autocomplete="off" value='+answercode[5]+' required disabled/> </br></br><h3>7. Za pomocą jakiej komendy możesz sprawdzić wszystkie ostrzeżenia użytkownika? '+qpop[7]+'</h3></br> <input type="text" class="form-input" name="q7" title="Wprowadź komendę" autocomplete="off" value='+answercode[6]+' required disabled/> </br></br><h3>8. Za pomocą jakiej komendy możesz zbanować użytkownika? '+qpop[8]+'</h3></br> <input type="text" class="form-input" name="q8" title="Wprowadź komendę" autocomplete="off" value='+answercode[7]+' required disabled/> </br></br><h3>9. Za pomocą jakiej komendy możesz nadać ostrzeżenie użytkownikowi? '+qpop[9]+'</h3></br> <input type="text" class="form-input" name="q9" title="Wprowadź komendę" autocomplete="off" value='+answercode[8]+' required disabled/> </br></br><h3>10. Za pomocą jakiej komendy możesz usunąć wcześniej nadane ostrzeżenie? '+qpop[10]+'</h3></br> <input type="text" class="form-input" name="q10" title="Wprowadź komendę" autocomplete="off" value='+answercode[9]+' required disabled/> </br></br><h3>11. Składnia w komendzie do wyciszania składa się następująco z: '+qpop[11]+'</h3></br> <label class="container">wzmianki, czasu wyciszenia, ewentualnego powodu <input type="radio" id="q11a" name="q11" '+q11[0]+' disabled> <span class="checkmark"></span> </label> <label class="container">czasu wyciszenia, wzmianki, ewentualnego powodu <input type="radio" id="q11b" name="q11" '+q11[1]+' disabled> <span class="checkmark"></span> </label> <label class="container">ewentualnego powodu, wzmianki, czasu wyciszenia <input type="radio" id="q11c" name="q11" '+q11[2]+' disabled> <span class="checkmark"></span> </label> </br></br><h3>12. Składnia w komendzie do usuwania ostrzeżeń składa się nastepująco z: '+qpop[12]+'</h3></br> <label class="container">wzmianki, powodu nadanego ostrzeżenia <input type="radio" id="q12a" name="q12" '+q12[0]+' disabled> <span class="checkmark"></span> </label> <label class="container">wzmianki <input type="radio" id="q12b" name="q12" '+q12[1]+' disabled> <span class="checkmark"></span> </label> <label class="container">ID ostrzeżenia <input type="radio" id="q12c" name="q12" '+q12[2]+' disabled> <span class="checkmark"></span> </label> </br></br><h3>13. Składnia w komendach do wyrzucania oraz banowania składa się następująco z: '+qpop[13]+'</h3></br> <label class="container">wzmianki, ewentualnego powodu <input type="radio" id="q13a" name="q13" '+q13[0]+' disabled> <span class="checkmark"></span> </label> <label class="container">ewentualnego powodu, wzmianki <input type="radio" id="q13b" name="q13" '+q13[1]+' disabled> <span class="checkmark"></span> </label> </br></br><h3>14. Użytkownik podszywa się pod innego użytkownika. Poprosiłeś/aś go o zmianę nazwy użytkownika/avataru bezskutecznie. Co robisz? '+qpop[14]+'</h3></br> <label class="container">Banuję <input type="radio" id="q14a" name="q14" '+q14[0]+' disabled> <span class="checkmark"></span> </label> <label class="container">Wyrzucam z serwera <input type="radio" id="q14b" name="q14" '+q14[1]+' disabled> <span class="checkmark"></span> </label> <label class="container">Nadaję ostrzeżenie <input type="radio" id="q14c" name="q14" '+q14[2]+' disabled> <span class="checkmark"></span> </label> <label class="container">Wyciszam na 1h <input type="radio" id="q14d" name="q14" '+q14[3]+' disabled> <span class="checkmark"></span> </label> </br></br><h3>15. Użytkownik wysyła memy na kanale ogólnym mimo upomnień o nieużywanie kanałów zgodnie z ich przeznaczeniem. Co robisz? '+qpop[15]+'</h3></br> <label class="container">Nadaję ostrzeżenie, jeśli się nie poprawi wyciszam na 5/10/30 minut <input type="radio" id="q15a" name="q15" '+q15[0]+' disabled> <span class="checkmark"></span> </label> <label class="container">Nadaję ostrzeżenie, jeśli się nie poprawi - wyrzucam z serwera <input type="radio" id="q15b" name="q15" '+q15[1]+' disabled> <span class="checkmark"></span> </label> <label class="container">Wyciszam na 5/10/30 minut, jeśli się nie poprawi - wyrzucam z serwera <input type="radio" id="q15c" name="q15" '+q15[2]+' disabled> <span class="checkmark"></span> </label> <label class="container">Wyrzucam z serwera, jeśli po powrocie się nie poprawi - banuję <input type="radio" id="q15d" name="q15" '+q15[3]+' disabled> <span class="checkmark"></span> </label> </br></br><h3>16. Użytkownik wysyła wiele wiadomości w małym odstępie czasowym. Nikt do tej pory nie zareagował. Co robisz? '+qpop[16]+'</h3></br> <label class="container">Wyciszam <input type="radio" id="q16a" name="q16" '+q16[0]+' disabled> <span class="checkmark"></span> </label> <label class="container">Upominam <input type="radio" id="q16b" name="q16" '+q16[1]+' disabled> <span class="checkmark"></span> </label> <label class="container">Wyrzucam z serwera <input type="radio" id="q16c" name="q16" '+q16[2]+' disabled> <span class="checkmark"></span> </label> <label class="container">Nadaję ostrzeżenie <input type="radio" id="q16d" name="q16" '+q16[3]+' disabled> <span class="checkmark"></span> </label> </br> </form>'+'</br></br><center><p>Ten dokument został wygenerowany automatycznie przez System Rekrutacji Serwerowej</p>'
+	win.document.title = 'recruitment_test_result_'+testid;
+	return false;
+    
+}
+
+
+
+
+
+
+</script>
