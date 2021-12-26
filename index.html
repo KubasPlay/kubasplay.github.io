@@ -1165,7 +1165,7 @@ function saveState(numerzgloszenia, state, punktyzatest) {
 				if (state == "remove") {
 					koddowpisu = koddowpisu;
 				} else {
-					if (punktyzatest != "") {
+					if (punktyzatest != undefined) {
 						danezgloszenia[2] = "&test"+punktyzatest 
 					}
 					koddowpisu = koddowpisu + '"'+danezgloszenia[0]+'": "'+danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+state+'", '
