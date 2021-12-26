@@ -208,6 +208,34 @@ a{
 	background-color: #1e6c93;
 	color: white;
 }
+.check-test-button {
+	height: 54px;
+	width: 230px;
+	border-radius:0px 10px 10px 0px;
+	-moz-border-radius:0px 10px 10px 0px;
+	-webkit-border-radius:0px 10px 10px 0px;
+	border: none;
+	font-size: 20px;
+	padding-left: 5px;
+	background-color: #1e6c93;
+	color: white;
+}
+.check-test-input {
+	height: 50px;
+	width: 250px;
+	border-radius:10px 0px 0px 10px;
+	-moz-border-radius:10px 0px 0px 10px;
+	-webkit-border-radius:10px 0px 0px 10px;
+	border: 1px solid #363636;
+	font-size: 20px;
+	padding-left: 5px;
+	outline: none;
+	transition: width ease 0.5s;
+}
+.check-test-input:focus {
+	width: 70%;
+	transition: width ease 0.5s;
+}
 .edit-button2 {
 	height: 50px;
 	border-radius:0px 10px 10px 0px;
@@ -218,6 +246,10 @@ a{
 	padding-left: 5px;
 	background-color: #1e6c93;
 	color: white;
+}
+.accept-points:hover {
+	cursor: pointer;
+	color: #737373;
 }
 table {
   border: 2px solid #FFFFFF;
