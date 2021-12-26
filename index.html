@@ -825,7 +825,7 @@ function testScore2() {
 	if (tabelunia == '<table class="tabelka"><thead> <tr> <th>Numer zgłoszenia</th> <th>ID użytkownika</th> <th>Wynik testu</th> </tr> </thead> <tbody> </tbody> </table>') {
 		document.getElementById("wyniki-testow").innerHTML = "</br></br></br><center><h1>Brak wyników testów!</h1>";
 	} else {
-		document.getElementById("wyniki-testow").innerHTML = "<h2>Wyniki testów</h2></br>" + tabelunia + "</br><p>*Wyniki zaznaczone na żółto nie zostały sprawdzone</p>" + '</br><a href="https://kubasplay.github.io/test-check.html"><h2>Otwórz panel sprawdzania testów</h2></a>';
+		document.getElementById("wyniki-testow").innerHTML = "<h2>Wyniki testów</h2></br>" + tabelunia + "</br><p>*Wyniki zaznaczone na żółto nie zostały sprawdzone</p>" + '</br><a href="https://kubasplay.github.io/test-check.html" target="_blank"><h2>Otwórz panel sprawdzania testów</h2></a>';
 	}
 	
 	return false;
