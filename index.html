@@ -594,7 +594,7 @@ function pos2() {
   document.querySelector(".prof").style.display = "none";
   window.open("#pos2","_self")
   testScore();
-  document.getElementById("sprawdzanie-testow").innerHTML = '<h2>Sprawdzanie testów</h2></br><form onSubmit="return checkTest();"><input type="text" class="check-test-input" placeholder="Kod odpowiedzi" id="answercode" autocomplete=off required><input type="submit" class="check-test-button" value="Przejdź do sprawdzania"></form>';
+  document.getElementById("sprawdzanie-testow").innerHTML = '<h2>Sprawdzanie testów</h2><p style="color: #ff4545;">Prosimy o niekorzystanie z tej funkcji na urządzeniach mobilnych</p></br><form onSubmit="return checkTest();"><input type="text" class="check-test-input" placeholder="Kod odpowiedzi" id="answercode" autocomplete=off required><input type="submit" class="check-test-button" value="Przejdź do sprawdzania"></form>';
   document.getElementById("sprawdzanie-testow").style.display = "none";
   return false;
 }
