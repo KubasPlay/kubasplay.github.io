@@ -619,7 +619,7 @@ function pos4() {
   document.querySelector(".page5").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos4","_self")
-  document.getElementById("edycja").innerHTML = '<form onSubmit="return editclick();"><input type="text" class="input" placeholder="Numer wniosku" id="numerwniosku" autocomplete=off><input type="submit" class="edit-button" value="Edytuj"></form>';
+  document.getElementById("edycja").innerHTML = '<form onSubmit="return editclick();"><input type="text" class="input" placeholder="Numer wniosku lub ID użytkownika" id="numerwniosku" autocomplete=off><input type="submit" class="edit-button" value="Edytuj"></form>';
   return false;
 }
 function pos5() {
@@ -1061,10 +1061,67 @@ function change2(numerzgloszenia) {
 
 }
 function editclick() {
-	change(document.getElementById("numerwniosku").value);
+	if (document.getElementById("numerwniosku").value.length == 6) {
+		change(document.getElementById("numerwniosku").value);
+	} else {
+		changeByID(document.getElementById("numerwniosku").value);
+	}
 	return false;
 
 }
+
+function changeByID(numerzgloszenia) {
+	pos4();
+	document.getElementById("edycja").innerHTML = "</br></br></br><center><h1>Pobieranie danych...</h1><h2>ID: "+numerzgloszenia+"</h2></center>";
+	let req = new XMLHttpRequest();
+
+	req.onreadystatechange = () => {
+	  if (req.readyState == XMLHttpRequest.DONE) {
+		//console.log(req.responseText);
+		jsonData = req.responseText;
+		changeByID2(numerzgloszenia);
+	  }
+	};
+
+	req.open("GET", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef/latest", true);
+	req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+	req.setRequestHeader("X-BIN-META", "false");
+	req.send();
+	return false;
+
+
+}
+
+function changeByID2(numerzgloszenia) {
+	var liczbazgloszen = 0;
+	var liczek = 3;
+	var lpzgloszenia = 1;
+	var danezgloszenia = "";
+	var akceptacja = "";
+	var odrzucenie = "";
+	jsonData2 = jsonData.split('"');
+	liczbazgloszen = jsonData2.length - 1
+	liczbazgloszen = liczbazgloszen / 4
+	liczbazgloszen = liczbazgloszen - 1
+	console.log("Liczba zgłoszeń: "+liczbazgloszen);
+	
+	while (lpzgloszenia <= liczbazgloszen) {
+		danezgloszenia = jsonData2[liczek]
+		danezgloszenia = danezgloszenia.split(';');
+		if (danezgloszenia[1] == numerzgloszenia) {
+			change(danezgloszenia[0]);
+			return false;
+		}
+		liczek = liczek + 4
+		lpzgloszenia = lpzgloszenia + 1
+	}
+	
+	document.getElementById("edycja").innerHTML = "</br></br></br><center><h1>Nie znaleziono wniosku</h1><h2>o ID "+numerzgloszenia+"!</h2></center>";
+	return false;
+
+
+}
+
 function newStateEdit() {
 	console.log("Zmienię wniosek nr "+nrzgloszenia+" na status "+document.getElementById("newstate").value);
 	saveState(nrzgloszenia, document.getElementById("newstate").value);

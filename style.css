@@ -188,6 +188,7 @@ a{
 }
 .input {
 	height: 50px;
+	width: 400px;
 	border-radius:10px 0px 0px 10px;
 	-moz-border-radius:10px 0px 0px 10px;
 	-webkit-border-radius:10px 0px 0px 10px;
