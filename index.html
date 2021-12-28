@@ -139,7 +139,7 @@
 	</div>
 	<div class="menu-pos" id="pos6" onClick="return pos6()">
 		<div class="menu-icon">
-			<img src="https://i.imgur.com/5RDHAIG.png" width="40px"></img>
+			<img src="https://i.imgur.com/yoJAl7p.png" width="40px"></img>
 		</div>
 		<span class="menu-content">Wiadomości</span>
 	</div>
@@ -374,6 +374,7 @@ function pos6() {
   document.querySelector(".page6").style.display = "block";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos6","_self")
+  document.getElementById("wyslijwiadomosc").innerHTML = '<h2>Adresat</h2> <input type="text" list="states" name="adresat" class="message-gen-input" autocomplete="off"> <datalist id="states"> <option value="Weryfikacja zgłoszenia"></option> <option value="Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową"></option> <option value="Weryfikacja rekrutacji głosowej"></option> <option value="Rekrutacja głosowa ukończona"></option> <option value="Oczekiwanie na wypełnienie testu"></option> <option value="Test ukończony"></option> <option value="Przyjęto do administracji"></option> <option value="Niezakwalifikowano do dalszych etapów"></option> </datalist> </br></br> <h2>Treść wiadomości</h2> <textarea name="message" class="message-gen"></textarea> </br> <input type="button" class="message-gen-button" value="Wyślij" onClick="sendMsg();">';
   return false;
 }
 function prof() {
@@ -742,7 +743,7 @@ function sendMsg() {
 	  if (req.readyState == XMLHttpRequest.DONE) {
 		//console.log(req.responseText);
 		jsonData = req.responseText;   
-		change2(numerzgloszenia);
+		console.log("POBRANO DANE");
 	  }
 	};
 
