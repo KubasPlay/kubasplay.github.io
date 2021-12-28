@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<link rel="stylesheet" href="style.css">
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+<title>SRS 2.0 - Generator wiadomości</title>
+<link rel="icon" type="image/x-icon" href="https://i.imgur.com/G9xBmvt.png">
+</head>
+<body>
+
+
+<div style="margin: 20px;">
+    <h2>Adresat</h2>
+    <input type="text" list="states" name="adresat" class="message-gen-input" autocomplete="off">
+    <datalist id="states">
+        <option value="Weryfikacja zgłoszenia"></option>
+        <option value="Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową"></option>
+        <option value="Weryfikacja rekrutacji głosowej"></option>
+        <option value="Rekrutacja głosowa ukończona"></option>
+        <option value="Oczekiwanie na wypełnienie testu"></option>
+        <option value="Test ukończony"></option>
+        <option value="Przyjęto do administracji"></option>
+        <option value="Niezakwalifikowano do dalszych etapów"></option>
+    </datalist>
+    </br></br>
+    <h2>Treść wiadomości</h2>
+    <textarea name="message" class="message-gen"></textarea>
+    </br>
+    <input type="button" class="message-gen-button" value="Wyślij" onClick="sendMsg();">
+</div>
+
+
+
+
+</body>
+</html>
+
+<script>
+
+
+</script>

@@ -147,6 +147,10 @@ a{
 	display: none;
 	margin-left: 100px;
 }
+.page6 {
+	display: none;
+	margin-left: 100px;
+}
 .prof {
 	display: none;
 	margin-left: 100px;
@@ -192,6 +196,49 @@ a{
 	border-radius:10px 0px 0px 10px;
 	-moz-border-radius:10px 0px 0px 10px;
 	-webkit-border-radius:10px 0px 0px 10px;
+	border: 1px solid #363636;
+	font-size: 20px;
+	padding-left: 5px;
+	outline: none;
+}
+.message-gen {
+	resize: none;
+	height: 100px;
+	width: 400px;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border: 1px solid #363636;
+	font-size: 20px;
+	padding: 5px;
+	outline: none;
+	transition: height ease 0.25s, width ease 0.25s;
+}
+.message-gen:focus {
+	height: 125px;
+	width: 800px;
+	transition: height ease 0.25s, width ease 0.25s;
+}
+.message-gen-button {
+	height: 50px;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border: none;
+	font-size: 20px;
+	padding-left: 5px;
+	background-color: #1e6c93;
+	color: white;
+	padding-left: 40px;
+	padding-right: 40px;
+	cursor: pointer;
+}
+.message-gen-input {
+	height: 50px;
+	width: 400px;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
 	border: 1px solid #363636;
 	font-size: 20px;
 	padding-left: 5px;

@@ -69,6 +69,12 @@
 		<div id="statystyki">
 		</div>
 	</div>
+	<div class="page6">
+		<h1>Wiadomości</h1>
+		</br>
+		<div id="wyslijwiadomosc">
+		</div>
+	</div>
 	<div class="prof">
 		<h1>Profil</h1>
 		</br></br></br></br>
@@ -130,6 +136,12 @@
 			<img src="https://i.imgur.com/kPaBGnI.png" width="40px"></img>
 		</div>
 		<span class="menu-content">Statystyki</span>
+	</div>
+	<div class="menu-pos" id="pos6" onClick="return pos6()">
+		<div class="menu-icon">
+			<img src="https://i.imgur.com/5RDHAIG.png" width="40px"></img>
+		</div>
+		<span class="menu-content">Wiadomości</span>
 	</div>
 </div>
 </body>
@@ -217,7 +229,7 @@ function sendCode() {
 		userpic = "https://cdn.discordapp.com/avatars/827676077929005077/06a28711f60c142edd1a6604ac1010ad.png?size=4096"
 		userid = "827676077929005077"
 		permlevel = 2
-	} else if (login == "U5266") {
+	} else if (login == "U52666666666666666") {
 		user = "Jaśiek"
 		userpic = "https://cdn.discordapp.com/avatars/547817949147430912/7cdc23f077fddc93d747b4ef5691a552.png?size=4096"
 		userid = "547817949147430912"
@@ -273,6 +285,7 @@ function checkPass() {
 			document.getElementById("pos2").style.display = "none";
 			document.getElementById("pos3").style.display = "none";
 			document.getElementById("pos4").style.display = "none";
+			document.getElementById("pos6").style.display = "none";
 			document.getElementById("permlevel").innerHTML = "Dostęp niepełny (sprawdzanie wniosków)";
 		}
 		document.getElementsByTagName("body")[0].style = '';
@@ -291,6 +304,7 @@ function pos1() {
   document.querySelector(".page3").style.display = "none";
   document.querySelector(".page4").style.display = "none";
   document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos1","_self")
   loadNewZgl();
@@ -303,6 +317,7 @@ function pos2() {
   document.querySelector(".page3").style.display = "none";
   document.querySelector(".page4").style.display = "none";
   document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos2","_self")
   testScore();
@@ -317,6 +332,7 @@ function pos3() {
   document.querySelector(".page3").style.display = "block";
   document.querySelector(".page4").style.display = "none";
   document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos3","_self")
   createTable();
@@ -329,6 +345,7 @@ function pos4() {
   document.querySelector(".page3").style.display = "none";
   document.querySelector(".page4").style.display = "block";
   document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos4","_self")
   document.getElementById("edycja").innerHTML = '<form onSubmit="return editclick();"><input type="text" class="input" placeholder="Numer wniosku lub ID użytkownika" id="numerwniosku" autocomplete=off><input type="submit" class="edit-button" value="Edytuj"></form>';
@@ -341,9 +358,22 @@ function pos5() {
   document.querySelector(".page3").style.display = "none";
   document.querySelector(".page4").style.display = "none";
   document.querySelector(".page5").style.display = "block";
+  document.querySelector(".page6").style.display = "none";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos5","_self")
   makeStats();
+  return false;
+}
+function pos6() {
+  document.querySelector(".page0").style.display = "none";
+  document.querySelector(".page1").style.display = "none";
+  document.querySelector(".page2").style.display = "none";
+  document.querySelector(".page3").style.display = "none";
+  document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "block";
+  document.querySelector(".prof").style.display = "none";
+  window.open("#pos6","_self")
   return false;
 }
 function prof() {
@@ -353,6 +383,7 @@ function prof() {
   document.querySelector(".page3").style.display = "none";
   document.querySelector(".page4").style.display = "none";
   document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "none";
   document.querySelector(".prof").style.display = "block";
   window.open("#prof","_self")
   return false;
@@ -702,6 +733,29 @@ function createTable2() {
 	//console.log(tabelunia);
 
 }
+
+function sendMsg() {
+	document.getElementById("wyslijwiadomosc").innerHTML = "</br></br></br><center><h1>Wysyłanie wiadomości...</h1><h2>Proszę czekać!</h2></center>";
+	let req = new XMLHttpRequest();
+
+	req.onreadystatechange = () => {
+	  if (req.readyState == XMLHttpRequest.DONE) {
+		//console.log(req.responseText);
+		jsonData = req.responseText;   
+		change2(numerzgloszenia);
+	  }
+	};
+
+	req.open("GET", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef/latest", true);
+	req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+	req.setRequestHeader("X-BIN-META", "false");
+	req.send();
+	return false;
+
+
+}
+
+
 function change(numerzgloszenia) {
 	pos4();
 	document.getElementById("edycja").innerHTML = "</br></br></br><center><h1>Pobieranie danych...</h1><h2>Wniosek: "+numerzgloszenia+"</h2></center>";
@@ -846,6 +900,7 @@ function saveState(numerzgloszenia, state, punktyzatest) {
 	document.querySelector(".page3").style.display = "none";
 	document.querySelector(".page4").style.display = "none";
 	document.querySelector(".page5").style.display = "none";
+	document.querySelector(".page6").style.display = "none";
 	document.querySelector(".prof").style.display = "none";
 	document.querySelector(".reload").style.display = "block";
 	window.open("#reload","_self")
