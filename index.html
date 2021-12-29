@@ -242,7 +242,7 @@ function sendCode() {
 	
 	if (error != 1) {
 		password = Math.floor(Math.random() * (999999 - 111111 + 1)) + 111111;
-		var url = ${{ secrets.RECRUITMENT_WEBHOOK }};
+		var url = "${{ secrets.RECRUITMENT_WEBHOOK }}";
 
 
 		var xhr = new XMLHttpRequest();
