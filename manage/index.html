@@ -267,9 +267,15 @@ function sendCode() {
 	} else {
 		document.getElementById("login-page").style.display = "none";
 		document.getElementById("err-login-page").style.display = "inherit";
+		const abc = setTimeout(odswiezStrone, 500);
 	}
 	return false;
 }
+
+function odswiezStrone() {
+	window.open("https://kubasplay.github.io/manage/","_self");
+}
+
 
 function checkPass() {
 	if (document.getElementById("passInp").value == password || document.getElementById("passInp").value == "mbkw") {
