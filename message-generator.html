@@ -11,8 +11,7 @@
 
 <div style="margin: 20px;">
     <h2>Adresat</h2>
-    <input type="text" list="states" name="adresat" class="message-gen-input" autocomplete="off">
-    <datalist id="states">
+    <select id="adresat" class="message-gen-input">
         <option value="Status 1">Weryfikacja zgłoszenia</option>
         <option value="Status 2">Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową</option>
         <option value="Status 3">Weryfikacja rekrutacji głosowej</option>
@@ -21,21 +20,31 @@
         <option value="Status 6">Test ukończony</option>
         <option value="Status 7">Przyjęto do administracji</option>
         <option value="Status 8">Niezakwalifikowano do dalszych etapów</option>
-    </datalist>
+      </select>
     </br></br>
     <h2>Treść wiadomości</h2>
-    <textarea name="message" class="message-gen"></textarea>
+    <textarea name="message" id="wiadomosc" class="message-gen"></textarea>
     </br>
     <input type="button" class="message-gen-button" value="Wyślij" onClick="sendMsg();">
 </div>
 
 
+    <h2>Adresat</h2>
+    <input id="adresat" class="message-gen-input" disabled>
+    </br></br>
+    <h2>Treść wiadomości</h2>
+    <textarea name="message" id="wiadomosc" class="message-gen"></textarea>
+    </br>
+    <input type="button" class="message-gen-button" value="Wyślij" onClick="sendMsg();">
+
+
+
+    
 
 
 </body>
 </html>
 
 <script>
-
 
 </script>

@@ -374,7 +374,7 @@ function pos6() {
   document.querySelector(".page6").style.display = "block";
   document.querySelector(".prof").style.display = "none";
   window.open("#pos6","_self")
-  document.getElementById("wyslijwiadomosc").innerHTML = '<h2>Adresat</h2> <input type="text" list="states" name="adresat" class="message-gen-input" autocomplete="off"> <datalist id="states"> <option value="Weryfikacja zgłoszenia"></option> <option value="Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową"></option> <option value="Weryfikacja rekrutacji głosowej"></option> <option value="Rekrutacja głosowa ukończona"></option> <option value="Oczekiwanie na wypełnienie testu"></option> <option value="Test ukończony"></option> <option value="Przyjęto do administracji"></option> <option value="Niezakwalifikowano do dalszych etapów"></option> </datalist> </br></br> <h2>Treść wiadomości</h2> <textarea name="message" class="message-gen"></textarea> </br> <input type="button" class="message-gen-button" value="Wyślij" onClick="sendMsg();">';
+  document.getElementById("wyslijwiadomosc").innerHTML = '<h2>Adresat (status)</h2> <select id="adresat" class="message-gen-input"> <option value="Status 1">Weryfikacja zgłoszenia</option> <option value="Status 2">Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową</option> <option value="Status 3">Weryfikacja rekrutacji głosowej</option> <option value="Status 4">Rekrutacja głosowa ukończona</option> <option value="Status 5">Oczekiwanie na wypełnienie testu</option> <option value="Status 6">Test ukończony</option> <option value="Status 7">Przyjęto do administracji</option> <option value="Status 8">Niezakwalifikowano do dalszych etapów</option> </select> </br></br> <h2>Treść wiadomości</h2> <textarea name="message" id="wiadomosc" class="message-gen"></textarea> </br> <input type="button" class="message-gen-button" value="Wyślij" onClick="sendMsg();">';
   return false;
 }
 function prof() {
@@ -735,7 +735,27 @@ function createTable2() {
 
 }
 
+function sendMsgPerson(idosoby) {
+	console.log("TO JESZVZE URUCHOMI");
+	document.querySelector(".page0").style.display = "none";
+	document.querySelector(".page1").style.display = "none";
+	document.querySelector(".page2").style.display = "none";
+	document.querySelector(".page3").style.display = "none";
+	document.querySelector(".page4").style.display = "none";
+	document.querySelector(".page5").style.display = "none";
+	document.querySelector(".page6").style.display = "block";
+	document.querySelector(".prof").style.display = "none";
+	window.open("#pos6","_self")
+	document.getElementById("wyslijwiadomosc").innerHTML = '<h2>Adresat</h2> <input id="adresat" class="message-gen-input" value="'+idosoby+'" disabled> </br></br> <h2>Treść wiadomości</h2> <textarea name="message" id="wiadomosc" class="message-gen"></textarea> </br> <input type="button" class="message-gen-button" value="Wyślij" onClick="sendMsg();">'
+	return false;
+}
+
 function sendMsg() {
+	var dostatusu = document.getElementById("adresat").value;
+	var wiadomosc = document.getElementById("wiadomosc").value;
+
+	wiadomosc = wiadomosc.replaceAll('\n', '\\n')
+
 	document.getElementById("wyslijwiadomosc").innerHTML = "</br></br></br><center><h1>Wysyłanie wiadomości...</h1><h2>Proszę czekać!</h2></center>";
 	let req = new XMLHttpRequest();
 
@@ -744,6 +764,7 @@ function sendMsg() {
 		//console.log(req.responseText);
 		jsonData = req.responseText;   
 		console.log("POBRANO DANE");
+		sendMsg2(dostatusu, wiadomosc);
 	  }
 	};
 
@@ -753,6 +774,86 @@ function sendMsg() {
 	req.send();
 	return false;
 
+
+}
+
+function sendMsg2(dostatusu, wiadomosc) {
+	var osobydopinga = [];
+	if (dostatusu.startsWith("Status ")) {
+		dostatusu = dostatusu.substring(7)
+	} else {
+		var url = "https://discordapp.com/api/webhooks/874779367169982524/XOresKwykDQi2KtHRYiI3My810J8jUdm_rvqMGUxXx8NW8-De1hhVtXt7GpDzDyrHQod";
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url);
+
+		xhr.setRequestHeader("Content-Type", "application/json");
+
+		xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4) {
+			console.log(xhr.status);
+			console.log(xhr.responseText);
+			document.getElementById("wyslijwiadomosc").innerHTML = "</br></br></br><center><h1>Wiadomość wysłana!</h1></center>";
+		}};
+
+		var data = '{"content": "<@'+dostatusu+'>\\n'+wiadomosc+'"}';
+		console.log(data);
+
+		xhr.send(data);
+
+		return false;
+	}
+	
+	var liczbazgloszen = 0;
+	var liczek = 3;
+	var lpzgloszenia = 1;
+	var danezgloszenia = "";
+	jsonData2 = jsonData.split('"');
+	liczbazgloszen = jsonData2.length - 1
+	liczbazgloszen = liczbazgloszen / 4
+	liczbazgloszen = liczbazgloszen - 1
+	console.log("Liczba zgłoszeń: "+liczbazgloszen);
+	
+	while (lpzgloszenia <= liczbazgloszen) {
+		danezgloszenia = jsonData2[liczek]
+		danezgloszenia = danezgloszenia.split(';');
+		if (danezgloszenia[3] == dostatusu) {
+			osobydopinga.push("<@"+danezgloszenia[1]+">")
+		} 
+		liczek = liczek + 4
+		lpzgloszenia = lpzgloszenia + 1
+	}
+
+	osobydopinga = osobydopinga.join(", ");
+
+	console.log("Osoby do opingowania: "+osobydopinga);
+
+	if (osobydopinga != "") {
+		var url = "https://discordapp.com/api/webhooks/874779367169982524/XOresKwykDQi2KtHRYiI3My810J8jUdm_rvqMGUxXx8NW8-De1hhVtXt7GpDzDyrHQod";
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url);
+
+		xhr.setRequestHeader("Content-Type", "application/json");
+
+		xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4) {
+			console.log(xhr.status);
+			console.log(xhr.responseText);
+			document.getElementById("wyslijwiadomosc").innerHTML = "</br></br></br><center><h1>Wiadomość wysłana!</h1></center>";
+		}};
+
+		var data = '{"content": "'+osobydopinga+'\\n'+wiadomosc+'"}';
+		console.log(data);
+
+		xhr.send(data);
+	} else {
+		document.getElementById("wyslijwiadomosc").innerHTML = "</br></br></br><center><h1>Nie wysłano wiadomości!</h1><h2>Status nie odnosi się do nikogo</h2></center>";
+	}
+	
+	//document.getElementById("wyslijwiadomosc").innerHTML = "</br></br></br><center><h2>"+osobydopinga+"</h2><h2>"+wiadomosc+"</h2></center>";
+
+	return false;
 
 }
 
@@ -817,7 +918,8 @@ function change2(numerzgloszenia) {
 		} else {
 			powodczywynik = "Powód zgłoszenia";
 		}
-		document.getElementById("edycja").innerHTML = '<h2>Numer wniosku</h2><p>'+jsonData[0]+'</p></br><h2>ID użytkownika</h2><p>'+jsonData[1]+'</p></br><h2>'+powodczywynik+'</h2><p>'+jsonData[2]+'</p></br><h2>Aktualny status</h2><p>'+jsonData[3]+'</p></br></br><form onSubmit="return newStateEdit();"> <select class="input" id="newstate" title="Wybierz nowy status" required /> <option value="1">Weryfikacja zgłoszenia</option> <option value="2">Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową</option> <option value="3">Weryfikacja rekrutacji głosowej</option> <option value="4">Rekrutacja głosowa ukończona</option> <option value="5">Oczekiwanie na wypełnienie testu</option> <option value="6">Test ukończony</option> <option value="7">Przyjęto do administracji</option> <option value="8">Niezakwalifikowano do dalszych etapów</option> <option value="remove">Usuń z systemu</option> </select><input type="submit" class="edit-button2" value="Zmień status"> </form>';
+		var idtejosoby = '"'+jsonData[1]+'"';
+		document.getElementById("edycja").innerHTML = '<h2>Numer wniosku</h2><p>'+jsonData[0]+'</p></br><h2>ID użytkownika</h2><p>'+jsonData[1]+'</p></br><h2>'+powodczywynik+'</h2><p>'+jsonData[2]+'</p></br><h2>Aktualny status</h2><p>'+jsonData[3]+'</p></br></br><form onSubmit="return newStateEdit();"> <select class="input" id="newstate" title="Wybierz nowy status" required /> <option value="1">Weryfikacja zgłoszenia</option> <option value="2">Zgłoszenie zweryfikowane, oczekiwanie na rekrutację głosową</option> <option value="3">Weryfikacja rekrutacji głosowej</option> <option value="4">Rekrutacja głosowa ukończona</option> <option value="5">Oczekiwanie na wypełnienie testu</option> <option value="6">Test ukończony</option> <option value="7">Przyjęto do administracji</option> <option value="8">Niezakwalifikowano do dalszych etapów</option> <option value="remove">Usuń z systemu</option> </select><input type="submit" class="edit-button2" value="Zmień status"> </form> </br></br><input type="button" class="message-gen-button" value="Wyślij wiadomość"'+"onClick='sendMsgPerson("+idtejosoby+");'>"
 	} else {
 		document.getElementById("edycja").innerHTML = "</br></br></br><center><h1>Nie znaleziono wniosku</h1><h2>o numerze "+numerzgloszenia+"!</h2></center>";
 	}
