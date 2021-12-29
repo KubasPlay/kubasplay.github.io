@@ -843,7 +843,7 @@ function sendMsg2(dostatusu, wiadomosc) {
 			document.getElementById("wyslijwiadomosc").innerHTML = "</br></br></br><center><h1>Wiadomość wysłana!</h1></center>";
 		}};
 
-		var data = '{"content": "'+osobydopinga+'\\n'+wiadomosc+'"}';
+		var data = '{"content": "||'+osobydopinga+'||\\n'+wiadomosc+'"}';
 		console.log(data);
 
 		xhr.send(data);
@@ -1034,6 +1034,7 @@ function saveState(numerzgloszenia, state, punktyzatest) {
 			if (danezgloszenia[0] == numerzgloszenia) {
 				if (state == "remove") {
 					koddowpisu = koddowpisu;
+					sendUpdate(danezgloszenia[0]+';'+danezgloszenia[1]+';'+danezgloszenia[2]+';'+state);
 				} else {
 					if (punktyzatest != undefined) {
 						danezgloszenia[2] = "&test"+punktyzatest 
