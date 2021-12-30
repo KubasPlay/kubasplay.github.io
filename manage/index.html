@@ -641,6 +641,8 @@ function testScore2() {
 			case '6':
 				if (danezgloszenia[2].startsWith('&test')) {
 					danezgloszenia[2] = danezgloszenia[2].substring(5);
+				} else {
+					break;
 				}
 				if (danezgloszenia[2].endsWith('#')) {
 					czydosprawdzenia = 'style="background-color: #f7edda;"';
