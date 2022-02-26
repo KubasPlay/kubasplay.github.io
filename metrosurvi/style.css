@@ -2,17 +2,97 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto Condensed', sans-serif;
+    background-color: #ffffff;
+}
+.menu{
+	position: fixed;
+	background-color: #1c8383;
+	width: 75px;
+	height: 100%;
+	transition: width 0.3s;
+	transition-timing-function: ease-out;
+	display: initial;
+}
+.menu div:target {
+  background-color: #196b6b;
+}
+.menu-icon{
+	display: inline-block;
+    vertical-align: middle;
+	width: 57.5px;
+	height: 57.5px;
+	margin-left: 17.5px;
+	margin-top: 17.5px;
+}
+.profile-icon{
+	display: inline-block;
+    vertical-align: middle;
+	width: 62.5px;
+	height: 62.5px;
+	margin-left: 12.5px;
+	margin-top: 12.5px;
+}
+.menu:hover{
+	width: 300px;
+}
+.menu-content{
+	opacity: .0;
+	font-family: Lato;
+	font-size: 25px;
+	color: white;
+	margin-left: 5px;
+    vertical-align: middle;
+	transition: opacity 0.05s ease-out;
+}
+.menu:hover .menu-content{
+	opacity: 1;
+	transition: opacity 0.25s ease-out 0.25s;
+}
+.menu:hover .profile-hr{
+	width: 280px;
+	transition: width 0.3s ease-out;
+}
+.profile{
+	height: 75px;
+}
+.profile-hr{
+	margin-top: 0;
+	margin-left: 7.5px;
+	width: 57.5px;
+	transition: width 0.2s ease-out;
+	border: 2px solid white;
+	border-radius: 5px
+}
+.menu-pos{
+	height: 75px;
+	cursor: pointer;
+}
+.menu-pos:hover{
+	background-color: #229999;
 }
 .content {
     display: none;
-    margin: 10px;
-    opacity: 0%;
-    transition: opacity 0.8s ease-in-out;
+    height: 100%;
+	width: 100%;
+	position: absolute;
+    padding-top: 20px;
 }
 .content h1 {
     font-size: 50px;
     font-weight: normal;
     margin: 0;
+}
+.page1 {
+	display: none;
+	margin-left: 100px;
+}
+.page2 {
+	display: none;
+	margin-left: 100px;
+}
+.page3 {
+	display: none;
+	margin-left: 100px;
 }
 .login-page {
     background-image: url('login-background.png');
@@ -85,11 +165,11 @@ body {
     height: 44px;
     vertical-align: middle;
     border: 0px solid;
-    background-color: #ff9a00;
+    background-color: #1c8383;
     border-radius: 15px;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     font-size: 17px;
-    color: #2e2e2e;
+    color: #ffffff;
     cursor: pointer;
 }

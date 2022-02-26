@@ -24,23 +24,57 @@
         </div> 
     </div>
 </div>
+
 <div id="content" class="content">
-    <center>
-    </br>
-    <div>
-        <img src="https://minotar.net/armor/bust/KubasPlay/100.png" style="vertical-align: middle;">
-        </br></br>
-        <h1>Witaj, KubasPlay!</h1>
+    <div class="page1">
+        <h1>MetroCard</h1>
+        </br>
     </div>
-    </center>
+    <div class="page2">
+        <h1>Jak dojadę?</h1>
+        </br>
+    </div>
+    <div class="page3">
+        <h1>MetrON</h1>
+        </br>
+    </div>
+</div>
+
+
+<div id="menu" class="menu">
+	<div class="menu-pos" id="prof">
+		<div class="profile-icon">
+			<img name="userpic" width="50px" style="border-radius: 50%;" src="https://minotar.net/armor/bust/KubasPlay/100.png"></img>
+		</div>
+		<span id="user" class="menu-content">KubasPlay</span>
+	</div>
+	<hr class="profile-hr"></hr>
+	<div class="menu-pos" id="pos1" onClick="return pos1()">
+		<div class="menu-icon">
+			<img src="credit-card.png" width="40px"></img>
+		</div>
+		<span class="menu-content">MetroCard</span>
+	</div>
+	<div class="menu-pos" id="pos2" onClick="return pos2()">
+		<div class="menu-icon">
+			<img src="underground.png" width="40px"></img>
+		</div>
+		<span class="menu-content">Jak dojadę?</span>
+	</div>
+	<div class="menu-pos" id="pos3" onClick="return pos3()">
+		<div class="menu-icon">
+			<img src="box.png" width="40px"></img>
+		</div>
+		<span class="menu-content">MetrON</span>
+	</div>
 </div>
 </body>
 </html>
 
 <script>
-document.getElementById("content").style.display = "inherit";
-document.getElementById("login-page").style.display = "none";
-document.getElementById("content").style.opacity = "100%";
+document.getElementById("menu").style.display = "none";
+//document.getElementById("content").style.display = "inherit";
+//document.getElementById("login-page").style.display = "none";
 var login = "";
 var password = "";
 var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -76,12 +110,41 @@ function checkPass() {
 }
 
 function showContent() {
-    document.getElementById("content").style.display = "inherit";
+    document.getElementById("content").style.display = "initial";
     document.getElementById("login-page").style.display = "none";
-    const showContent2Timeout = setTimeout(showContent2, 100);
+    document.getElementById("menu").style.display = "initial";
 }
 
-function showContent2() {
-    document.getElementById("content").style.opacity = "100%";
+function pos1() {
+  document.querySelector(".page1").style.display = "block";
+  document.querySelector(".page2").style.display = "none";
+  document.querySelector(".page3").style.display = "none";
+  /*document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "none";*/
+  window.open("#pos1","_self")
+  return false;
+}
+
+function pos2() {
+  document.querySelector(".page1").style.display = "none";
+  document.querySelector(".page2").style.display = "block";
+  document.querySelector(".page3").style.display = "none";
+  /*document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "none";*/
+  window.open("#pos2","_self")
+  return false;
+}
+
+function pos3() {
+  document.querySelector(".page1").style.display = "none";
+  document.querySelector(".page2").style.display = "none";
+  document.querySelector(".page3").style.display = "block";
+  /*document.querySelector(".page4").style.display = "none";
+  document.querySelector(".page5").style.display = "none";
+  document.querySelector(".page6").style.display = "none";*/
+  window.open("#pos3","_self")
+  return false;
 }
 </script>
