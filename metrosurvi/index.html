@@ -12,20 +12,37 @@
 <body>
 <div id="login-page" class="login-page">
     <div class="login-window" id="login-window">
-        <img src="icon.png">
-        <h1>Logowanie</h1>
-        <h2>MetroSurvi</h2>
-        <form id="login-form" class="login-form">
-            <input type="text" placeholder="Nick" class="login-form-input" required>
-            <input type="password" placeholder="Hasło" class="login-form-input" required>
-            <input type="submit" value="Zaloguj" class="login-form-submit">
-        </form>
+        <div class="login-window-content" id="login-window-content">
+            <img src="icon.png">
+            <h1>Logowanie</h1>
+            <h2>MetroSurvi</h2>
+            <form id="login-form" class="login-form" onSubmit="return logIn();">
+                <input type="text" id="login" placeholder="Nick" class="login-form-input" required autofocus>
+                <input type="password" id="password" placeholder="Hasło" class="login-form-input" required>
+                <input type="submit" value="Zaloguj" class="login-form-submit">
+            </form>
+        </div> 
     </div>
+</div>
+<div id="content" class="content">
+    <center>
+    </br>
+    <div>
+        <img src="https://minotar.net/armor/bust/KubasPlay/100.png" style="vertical-align: middle;">
+        </br></br>
+        <h1>Witaj, KubasPlay!</h1>
+    </div>
+    </center>
 </div>
 </body>
 </html>
 
 <script>
+document.getElementById("content").style.display = "inherit";
+document.getElementById("login-page").style.display = "none";
+document.getElementById("content").style.opacity = "100%";
+var login = "";
+var password = "";
 var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 window.onload = changeSize;
 function changeSize() {
@@ -34,5 +51,37 @@ function changeSize() {
     } else {
         document.getElementById("login-window").style.transform = "scale(1)"
     }
+}
+
+function logIn() {
+    login = document.getElementById("login").value;
+    password = document.getElementById("password").value;
+    document.getElementById("login-window-content").innerHTML = "<img src='loading.svg'>";
+    document.getElementById("login-window").style.height = "383px"
+    const checkPassTimeout = setTimeout(checkPass, 1500);
+    return false;
+}
+
+function checkPass() {
+    var auth = false
+    if (login == "KubasPlay" && password == "1234") {
+        auth = true
+    }
+    if (auth == true) {
+        document.getElementById("login-window").style.transform = "scale(0)";
+        document.getElementById("login-page").style.opacity = "0%";
+        const showContentTimeout = setTimeout(showContent, 800);
+    }
+    
+}
+
+function showContent() {
+    document.getElementById("content").style.display = "inherit";
+    document.getElementById("login-page").style.display = "none";
+    const showContent2Timeout = setTimeout(showContent2, 100);
+}
+
+function showContent2() {
+    document.getElementById("content").style.opacity = "100%";
 }
 </script>
