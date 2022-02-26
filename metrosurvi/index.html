@@ -26,7 +26,8 @@
 </html>
 
 <script>
-if (window.innerWidth < 800) {
+var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+if (width < 800) {
     document.getElementById("login-window").style.transform = "scale(1.5)"
 } else {
     document.getElementById("login-window").style.transform = "scale(1)"
