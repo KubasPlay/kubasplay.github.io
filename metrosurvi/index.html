@@ -27,9 +27,12 @@
 
 <script>
 var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-if (width < 1000) {
-    document.getElementById("login-window").style.transform = "scale(1.8)"
-} else {
-    document.getElementById("login-window").style.transform = "scale(1)"
+window.onload = changeSize;
+function changeSize() {
+    if (width < 1000) {
+        document.getElementById("login-window").style.transform = "scale(1.8)"
+    } else {
+        document.getElementById("login-window").style.transform = "scale(1)"
+    }
 }
 </script>
