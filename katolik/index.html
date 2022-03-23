@@ -12,8 +12,8 @@
 <body>
     <center>
         <h1>Dzień bez plecaka</h1>
-        <h2>Wybierz klasę</h2>
-    <select id="class" class="form-input">
+        <h2 id="first-heading2">Proszę czekać, ładowanie...</h2>
+    <select id="class" class="form-input" onChange="dataChange();">
         <option value="c7A">7A</option>
         <option value="c7B">7B</option>
         <option value="c7C">7C</option>
@@ -35,6 +35,7 @@
 
 <script>
 jsonData = "";
+document.getElementById("class").style.display = "none";
 loadData();
 
 function loadData() {
@@ -44,7 +45,9 @@ function loadData() {
     if (req.readyState == XMLHttpRequest.DONE) {
         console.log(req.responseText);
         jsonData = JSON.parse(req.responseText);
-        console.log(jsonData["c7A"][0]);
+        //console.log(jsonData["c7A"][0]);
+        document.getElementById("class").style.display = "initial";
+        document.getElementById("first-heading2").innerHTML = "Wybierz klasę"
     }
     };
 
@@ -52,7 +55,9 @@ function loadData() {
     req.setRequestHeader("X-Master-Key", "$2b$10$8/p/2J/76YYKqYgYberDEO56NTs5a5k6wOlsRtqGlLJmvwdIAi75G");
     req.setRequestHeader("X-Bin-Meta", "false");
     req.send();
+}
 
+function dataChange() {
 
 }
 </script>
