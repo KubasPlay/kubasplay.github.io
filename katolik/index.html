@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <title>Samorząd Uczniowski</title>
+</head>
+
+<body>
+    <center>
+    <select id="class" class="form-input">
+        <option value="c7A">7A</option>
+        <option value="c7B">7B</option>
+        <option value="c7C">7C</option>
+        <option value="c8A">8A</option>
+        <option value="c8B">8B</option>
+        <option value="c8C">8C</option>
+        <option value="c1NLO">1 LO</option>
+        <option value="c2NLO">2 LO</option>
+        <option value="c3NLO">3 LO</option>
+        <option value="c3LO">3 LO (maturzyści)</option>
+      </select>
+
+
+
+    </center>
+</body>
+</html>
+
+
+<script>
+jsonData = "";
+loadData();
+
+function loadData() {
+    let req = new XMLHttpRequest();
+
+    req.onreadystatechange = () => {
+    if (req.readyState == XMLHttpRequest.DONE) {
+        console.log(req.responseText);
+        jsonData = JSON.parse(req.responseText);
+        console.log(jsonData["c7A"][0]);
+    }
+    };
+
+    req.open("GET", "https://api.jsonbin.io/v3/b/623b668da703bb674932ec41/latest", true);
+    req.setRequestHeader("X-Master-Key", "$2b$10$8/p/2J/76YYKqYgYberDEO56NTs5a5k6wOlsRtqGlLJmvwdIAi75G");
+    req.setRequestHeader("X-Bin-Meta", "false");
+    req.send();
+
+
+}
+</script>
