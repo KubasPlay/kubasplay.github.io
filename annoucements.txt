@@ -2,4 +2,4 @@ Przykładowe ogłoszenie nr 1
 
 Przykładowe ogłoszenie nr 2
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non aliquet massa. In eget magna convallis, commodo justo eu, feugiat ex. Duis sed libero nec tortor viverra iaculis eget et risus. Donec in arcu ultrices, maximus augue non, dignissim diam. Praesent porta nibh ut velit maximus vulputate. Nulla vestibulum, orci ac aliquet elementum, ante lacus facilisis dolor, et eleifend nibh augue id metus. Phasellus at sem eget nisl malesuada tristique. Ut vulputate nisi congue, venenatis risus vitae, mattis turpis. Suspendisse nibh risus, malesuada quis mauris gravida, auctor ultrices nisl. Phasellus sit amet mattis metus, eu pulvinar libero. In euismod urna quis odio tempus consectetur eget id turpis. Nulla facilisis facilisis facilisis. In cursus elementum eros in auctor.
+Przykładowe ogłoszenie nr 3
