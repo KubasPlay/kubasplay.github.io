@@ -709,7 +709,11 @@ function createTable2() {
 				danezgloszenia[3] = "Oczekiwanie na wypełnienie testu";
 				break;
 			case '6':
-				danezgloszenia[3] = "Test ukończony";
+				if (danezgloszenia[2].startsWith('&test')) {
+					danezgloszenia[3] = "Test ukończony";
+				} else {
+					danezgloszenia[3] = "W TRAKCIE TESTU (SC)";
+				}
 				break;
 			case '7':
 				danezgloszenia[3] = "Przyjęto do administracji";
