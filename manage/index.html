@@ -636,6 +636,9 @@ function testScore2() {
 			czydosprawdzenia = 'style="background-color: #f7edda;"';
 			danezgloszenia[2] = danezgloszenia[2].slice(0, -1);
 		}
+		if (danezgloszenia[1] == "8") {
+			czyWpisac = false;
+		}
 		if (czyWpisac) {
 			tabelunia = tabelunia + ' <tr class="tabelka-row"'+czydosprawdzenia+' onClick="return change('+danezgloszenia[0]+');"> <td>'+danezgloszenia[0]+'</td> <td>'+danezgloszenia[1]+'</td> <td>'+danezgloszenia[2]+'%</td> </tr>'
 		}
