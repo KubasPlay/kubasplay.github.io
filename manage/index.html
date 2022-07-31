@@ -627,21 +627,17 @@ function testScore2() {
 		danezgloszenia = jsonData2[liczek]
 		danezgloszenia = danezgloszenia.split(';');
 		czydosprawdzenia = "";
-		switch (danezgloszenia[3]) {
-			case '6':
-				if (danezgloszenia[2].startsWith('&test')) {
-					danezgloszenia[2] = danezgloszenia[2].substring(5);
-				} else {
-					break;
-				}
-				if (danezgloszenia[2].endsWith('#')) {
-					czydosprawdzenia = 'style="background-color: #f7edda;"';
-					danezgloszenia[2] = danezgloszenia[2].slice(0, -1);
-				}
-				tabelunia = tabelunia + ' <tr class="tabelka-row"'+czydosprawdzenia+' onClick="return change('+danezgloszenia[0]+');"> <td>'+danezgloszenia[0]+'</td> <td>'+danezgloszenia[1]+'</td> <td>'+danezgloszenia[2]+'%</td> </tr>'
-				break;
-			default:
-				break;
+		czyWpisac = false;
+		if (danezgloszenia[2].startsWith('&test')) {
+			danezgloszenia[2] = danezgloszenia[2].substring(5);
+			czyWpisac = true;
+		}
+		if (danezgloszenia[2].endsWith('#')) {
+			czydosprawdzenia = 'style="background-color: #f7edda;"';
+			danezgloszenia[2] = danezgloszenia[2].slice(0, -1);
+		}
+		if (czyWpisac) {
+			tabelunia = tabelunia + ' <tr class="tabelka-row"'+czydosprawdzenia+' onClick="return change('+danezgloszenia[0]+');"> <td>'+danezgloszenia[0]+'</td> <td>'+danezgloszenia[1]+'</td> <td>'+danezgloszenia[2]+'%</td> </tr>'
 		}
 		liczek = liczek + 4
 		lpzgloszenia = lpzgloszenia + 1
