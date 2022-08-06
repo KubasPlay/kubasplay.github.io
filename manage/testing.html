@@ -1,39 +1,338 @@
-<!DOCTYPE html>
-<html lang="pl">
+<html>
 <head>
-<link rel="stylesheet" href="style.css">
-<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-<title>SRS 2.0</title>
-<link rel="icon" type="image/x-icon" href="https://i.imgur.com/G9xBmvt.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+	<style>
+		h1 {
+			font-family: 'Lato', sans-serif;
+			font-size: 50px;
+			color: #1e6c93;
+			margin: 0px;
+		}
+		h2 {
+			font-family: 'Lato', sans-serif;
+			font-size: 30px;
+			color: #1e6c93;
+			margin: 0px;
+		}
+		h3 {
+			font-family: 'Lato', sans-serif;
+			font-size: 20px;
+			color: #1e6c93;
+			margin: 0px;
+		}
+		p {
+			font-family: 'Lato', sans-serif;
+			font-size: 20px;
+			color: #ff6666;
+			margin: 0px;
+			cursor: pointer;
+		}
+		.starting-button {
+			 padding: 17px;
+			 font-size: 30px;
+			 border-width: 0px;
+			 border-color: #CCCCCC;
+			 background-color: #1e6c93;
+			 color: #ffffff;
+			 border-style: hidden;
+			 border-radius: 30px;
+			 box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+			 text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+			 cursor: pointer;
+		}
+		.starting-button:focus {
+			 outline:none;
+		}
+		.form-input {
+			 padding: 17px;
+			 font-size: 17px;
+			 border-width: 0px;
+			 border-color: #CCCCCC;
+			 background-color: #FFFFFF;
+			 color: #000000;
+			 border-style: hidden;
+			 border-radius: 12px;
+			 box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+			 text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+			 width: 40%;
+		}
+		.form-input:focus {
+			 outline:none;
+		}
+		.next-button {
+			 padding: 23px;
+			 font-size: 20px;
+			 border-width: 0px;
+			 border-color: #CCCCCC;
+			 background-color: #1e6c93;
+			 color: #ffffff;
+			 border-style: hidden;
+			 border-radius: 12px;
+			 box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+			 text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+			 cursor: pointer;
+			 float: right;
+		}
+		.next-button:focus {
+			 outline:none;
+		}
+		.form-textarea {
+			resize: none;
+			overflow: hidden;
+			padding: 17px;
+			font-size: 17px;
+			border-width: 0px;
+			border-color: #CCCCCC;
+			background-color: #FFFFFF;
+			color: #000000;
+			border-style: hidden;
+			border-radius: 12px;
+			box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+			text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+			width: 40%;
+		}
+		.form-textarea:focus {
+			 outline:none;
+		}
+		.back-button {
+			 padding: 23px;
+			 font-size: 20px;
+			 border-width: 0px;
+			 border-color: #CCCCCC;
+			 background-color: #bfbfbf;
+			 color: #808080;
+			 border-style: hidden;
+			 border-radius: 12px;
+			 box-shadow: 0px 0px 9px rgba(66,66,66,.37);
+			 text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+			 cursor: pointer;
+			 float: left;
+		}
+		.back-button:focus {
+			 outline:none;
+		}
+	</style>
 </head>
-
 <body>
 
-    <center>
-    <div>
-    <p>
-    <input type="checkbox" onchange="changeTableVisibility()" id="state1button" checked>
-    <label>Weryfikacja zgłoszenia</label>
-    <input type="checkbox" onchange="changeTableVisibility()" id="state2button" checked>
-    <label>Oczekiwanie na rekrutację głosową</label>
-    <input type="checkbox" onchange="changeTableVisibility()" id="state3button" checked>
-    <label>Weryfikacja rekrutacji głosowej</label>
-    </br>
-    <input type="checkbox" onchange="changeTableVisibility()" id="state4button" checked>
-    <label>Rekrutacja głosowa ukończona</label>
-    <input type="checkbox" onchange="changeTableVisibility()" id="state5button" checked>
-    <label>Oczekiwanie na wypełnienie testu</label>
-    <input type="checkbox" onchange="changeTableVisibility()" id="state6button" checked>
-    <label>Test ukończony</label>
-    </br>
-    <input type="checkbox" onchange="changeTableVisibility()" id="state7button" checked>
-    <label>Przyjęto do administracji</label>
-    <input type="checkbox" onchange="changeTableVisibility()" id="state8button" checked>
-    <label>Niezakwalifikowano do dalszych etapów</label>
-    </p>
-    </div>
-    </center>
+
+<center>
+</br></br></br>
+<h1>Weź udział w rekrutacji</h1>
+<h2>Przygotuj swoje ID użytkownika - wpisz na serwerze komendę !moje-id i skopiuj je</h2>
+</br></br></br>
+	<input type="submit" class="starting-button" onclick="return stepone()" name="Submit" value="Zaczynamy!"/>
+</center>
 
 
-</body>
-</html>
+
+<script>
+    var usersBlacklist = ["935436245587341362", "842818859878973490", "460094754294595584"];
+	var iduzytkownika = "";
+	var powod = "";
+	var kodidentyfikacyjny = "";
+	var randomnumber = 0;
+	
+	function stepone() {
+		document.body.innerHTML = '';
+		document.write('<html> <head> <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet"> <style>h1 { font-family: "Lato", sans-serif; font-size: 50px; color: #1e6c93; margin: 0px; } h2 { font-family: "Lato", sans-serif; font-size: 30px; color: #1e6c93; margin: 0px; } h3 { font-family: "Lato", sans-serif; font-size: 20px; color: #1e6c93; margin: 0px; } p { font-family: "Lato", sans-serif; font-size: 20px; color: #ff6666; margin: 0px; } .starting-button { padding: 17px; font-size: 30px; border-width: 0px; border-color: #CCCCCC; background-color: #1e6c93; color: #ffffff; border-style: hidden; border-radius: 30px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); cursor: pointer; } .starting-button:focus { outline:none; } .form-input { padding: 17px; font-size: 17px; border-width: 0px; border-color: #CCCCCC; background-color: #FFFFFF; color: #000000; border-style: hidden; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); width: 40%; } .form-input:focus { outline:none; } .next-button { padding: 23px; font-size: 20px; border-width: 0px; border-color: #CCCCCC; background-color: #1e6c93; color: #ffffff; border-style: hidden; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); cursor: pointer; float: right; } .next-button:focus { outline:none; } .form-textarea { resize: none; overflow: hidden; padding: 17px; font-size: 17px; border-width: 0px; border-color: #CCCCCC; background-color: #FFFFFF; color: #000000; border-style: hidden; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); width: 40%; } .form-textarea:focus { outline:none; } .back-button { padding: 23px; font-size: 20px; border-width: 0px; border-color: #CCCCCC; background-color: #bfbfbf; color: #808080; border-style: hidden; border-radius: 12px; box-shadow: 0px 0px 9px rgba(66,66,66,.37); text-shadow: 0px 0px 0px rgba(66,66,66,.0); cursor: pointer; float: left; } .back-button:focus { outline:none; }</style> </head> <body>');
+		document.write("<center>");
+		document.write("</br></br></br>");
+		document.write("<h1>Wklej swoje ID użytkownika</h1>");
+		document.write('</br></br>');
+		//document.write('<form name="krokpierwszy" onsubmit="return steptwo()" >');
+		document.write('<input type="text" class="form-input" name="iduzytkownika" title="Wprowadź swoje ID" placeholder="ID użytkownika" value="'+iduzytkownika+'" maxlength=20 required />');
+		document.write('</br>');
+		document.write('<p id="errorinformation"></br></br></p>');
+		document.write("</center>");
+		document.write("</br></br></br>");
+		document.write('<input onclick="return steptwo()" type="submit" class="next-button" name="Submit" value="          Dalej »          "/>');
+		//document.write('</form>');
+		//document.write("</body></html>");
+		iduzytkownika = "";
+		console.log("PRZYWOŁANO KROK 1");
+		return false;
+	}
+	
+	
+	function steptwo() {
+
+		if (iduzytkownika == "") {
+			iduzytkownika = document.getElementsByName('iduzytkownika')[0].value
+			console.log("pierwszy if wykazał, że jest pusto");
+			console.log("a jego wartosc to: '"+iduzytkownika+"'");
+			document.getElementById("errorinformation").innerHTML = "</br>⚠️ Wprowadź swoje ID! Wpisz na serwerze komendę !moje-id";
+		}
+		
+		if (iduzytkownika == "") {
+			console.log("drugi if także");
+			return false;
+		} 
+		
+		
+		var validateid = iduzytkownika / 1;
+		console.log(validateid);
+
+        //window.alert(usersBlacklist.includes(validateid.toString()) + "\n" + iduzytkownika + "\n" + validateid);
+		
+		
+		if (Number.isNaN(validateid)) {
+			document.getElementById("errorinformation").innerHTML = "</br>⚠️ Wprowadź prawidłowe ID! Wpisz na serwerze komendę !moje-id";
+			iduzytkownika = "";
+			return false;
+		}
+		
+		if (validateid.toString().length < 17) {
+			document.getElementById("errorinformation").innerHTML = "</br>⚠️ Wprowadź prawidłowe ID! Wpisz na serwerze komendę !moje-id";
+			iduzytkownika = "";
+			return false;
+		}
+
+        if (usersBlacklist.includes(iduzytkownika)) {
+            document.getElementById("errorinformation").innerHTML = "</br>⚠️ Znajdujesz się na czarnej liście - nie możesz brać udziału w rekrutacji";
+			iduzytkownika = "";
+			return false;
+        }
+		
+		
+		
+		//document.getElementById("errorinformation").innerHTML = myObj.name;
+		
+		document.body.innerHTML = '';
+		document.write("<center>");
+		document.write("</br></br></br>");
+		document.write("<h1>Dlaczego chcesz wziąć udział w rekrutacji?</h1>");
+		document.write('</br></br>');
+		document.write('<textarea name="powod" class="form-textarea" rows="3" maxlength="200" value="'+powod+'" placeholder="Powód wzięcia udziału w rekrutacji"></textarea>');
+		document.write('</br>');
+		document.write('<p id="errorinformation"></br></br></p>');
+		document.write("</center>");
+		document.write("</br></br></br>");
+		document.write('<input onclick="return stepone()" type="submit" class="back-button" name="Submit" value="          « Wstecz          "/>');
+		document.write('<input onclick="return stepthree()" type="submit" class="next-button" name="Submit" value="          Dalej »          "/>');
+		//document.write("</body></html>");
+		console.log("PRZYWOŁANO KROK 2");
+		return false;
+	}
+	
+	
+	
+	function stepthree() {
+	
+		if (powod == "") {
+			powodzik = document.getElementsByName('powod')[0].value
+			powod = powodzik.replace( /[\r\n]+/gm, " " )
+			console.log("pierwszy if wykazał, że jest pusto");
+			console.log("a jego wartosc to: '"+powod+"'");
+		}
+		
+		if (powod == "") {
+			console.log("drugi if także");
+			document.getElementById("errorinformation").innerHTML = "</br>⚠️ Wprowadź powód wzięcia udziału w rekrutacji!";
+			return false;
+		} 
+		
+		
+		document.body.innerHTML = '';
+		document.write("<center>");
+		document.write("</br></br></br>");
+		document.write("<h1>Podsumowanie</h1>");
+		document.write("</br></br></br>");
+		document.write("<h2>ID użytkownika:</h2>");
+		document.write("<h3>"+iduzytkownika+"</h3>");
+		document.write("<h2>Powód wzięcia udziału w rekrutacji:</h2>");
+		document.write("<h3>"+powod+"</h3>");
+		document.write('</br></br>');
+		document.write('</br>');
+		document.write('<input onclick="return stepfour()" type="submit" class="starting-button" name="Submit" value="     Prześlij »     "/>');
+		console.log("PRZYWOŁANO KROK 3");
+		return false;
+	}
+	
+	function stepfour() {
+		randomnumber = Math.floor(Math.random() * (999999 - 111111 + 1)) + 111111;
+		var odebranykod = "";
+		var koddowpisania = "";
+		var informacja = "<h3>Potwierdzenie wysłaliśmy Ci na Discordzie</h3><h3>W przypadku zgubienia kodu, wpisz na serwerze komendę /rekrutacja</h3>";
+		document.body.innerHTML = '<center></br></br></br><h1>Wysyłanie podania...</h1>';
+		
+		let req = new XMLHttpRequest();
+
+		req.onreadystatechange = () => {
+		  if (req.readyState == XMLHttpRequest.DONE) {
+			odebranykod = req.responseText;
+			koddowpisania = odebranykod.slice(0, -1);
+			koddowpisania = koddowpisania + ', "'+randomnumber+'":"'+randomnumber+';'+iduzytkownika+';'+powod+';1"}'
+			console.log(koddowpisania);
+			let req1 = new XMLHttpRequest();
+
+			req1.onreadystatechange = () => {
+			  if (req1.readyState == XMLHttpRequest.DONE) {
+				console.log(req1.responseText);
+				document.body.innerHTML = '<center></br></br></br><h1>Pomyślnie wysłano!</h1></br><h2>Twój kod identyfikacyjny: '+randomnumber+'</h2>'+informacja+'</br></br><input type="submit" onclick="return ending()" class="starting-button" name="Submit" value="     Zakończ     "/>';
+				var url = "https://discordapp.com/api/webhooks/924383608138006548/N-f1y9vtisB9AlNtEG2Rp5F8V4rbuXCyeJyK4V86kEZNcTAAlynx1VdIMK9uiJSL0AAb";
+
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", url);
+
+				xhr.setRequestHeader("Content-Type", "application/json");
+
+				xhr.onreadystatechange = function () {
+				   if (xhr.readyState === 4) {
+					  console.log(xhr.status);
+					  console.log(xhr.responseText);
+				   }};
+
+				var data = '{"content": "@everyone Wpłynęło nowe zgłoszenie."}';
+				if (powod.startsWith("&s")) {
+					console.log("Wybrano tryb cichy dla tego zgłoszenia");
+				} else {
+					xhr.send(data);
+				}
+
+                var xhr2 = new XMLHttpRequest();
+                xhr2.open("POST", "https://discord.com/api/webhooks/924383608138006548/N-f1y9vtisB9AlNtEG2Rp5F8V4rbuXCyeJyK4V86kEZNcTAAlynx1VdIMK9uiJSL0AAb");
+                xhr2.setRequestHeader("Content-Type", "application/json");
+                xhr2.onreadystatechange = function () {
+                if (xhr2.readyState === 4) {
+                    console.log(xhr2.status);
+                    console.log(xhr2.responseText);
+                }};
+                xhr2.send('{"content": "<@1000797875451744296>;0;'+iduzytkownika+';'+randomnumber+'"}');
+
+                
+
+			  }
+			};
+
+			req1.open("PUT", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef", true);
+			req1.setRequestHeader("Content-Type", "application/json");
+			req1.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+			req1.send(koddowpisania);
+		  }
+		};
+
+		req.open("GET", "https://api.jsonbin.io/v3/b/60ff0e11a917050205d0b1ef/latest", true);
+		req.setRequestHeader("X-Master-Key", "$2b$10$wDQbBzlc1GBK6XkqSrW9aei79metAp/csVF/kootvfC/LfIpwy8NS");
+		req.setRequestHeader("X-BIN-META", "false");
+		req.send();
+		
+		
+		return false;
+		
+		
+	}
+	
+	function ending() {
+	
+		window.open("https://sites.google.com/view/seebixolandia/recruitment/end", "_blank").focus();
+		document.body.innerHTML = '<center></br></br></br><h2>Twój kod identyfikacyjny:</h2><h1>'+randomnumber+'</h1>';
+		return false;
+	
+	}
+	
+
+
+
+</script>
