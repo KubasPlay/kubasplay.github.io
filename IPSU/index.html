@@ -122,10 +122,12 @@ function changeData() {
 }
 
 function resetData() {
-    localStorage.removeItem("fname");
-    localStorage.removeItem("sname");
-    localStorage.removeItem("class");
-    window.alert("Pomyślnie zresetowano wszystkie dane!\nAby zastosować, uruchom portal ponownie.")
+    if (confirm("Czy na pewno chcesz usunąć wszystkie dane?")) {
+        localStorage.removeItem("fname");
+        localStorage.removeItem("sname");
+        localStorage.removeItem("class");
+        window.location.reload();
+    }
 }
 
 
