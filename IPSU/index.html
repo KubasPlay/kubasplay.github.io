@@ -21,14 +21,14 @@
         Witaj!
     </div>
 
-    <div class="wide-box" id="szczesliwynumerek">
+    <div class="wide-box" id="szczesliwynumerek" onClick="openModal('szczesliwynumerek-page');">
         Sprawdź szczęśliwy numerek
     </div>
 
     <div class="wrapper">
         <div class="left">
             <div class="box1" id="lekcja">
-                10:20<br>EDB
+                
             </div>
             <div class="box2" id="propozycje">
                 Masz pomysł dla SU?
@@ -39,14 +39,14 @@
             <div class="box3" id="kalendarz">
                 Najbliższe wydarzenie
             </div>
-            <div class="box4" id="ustawienia" onClick="openModal('settings');">
+            <div class="box4" id="ustawienia" onClick="openModal('settings-page');">
                 Ustawienia
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal" id="settings">
+<div class="modal" id="settings-page">
     <div class="modal-content">
         <div class="modal-heading">
             <img src="close.png" onClick="closeModal();">
@@ -75,6 +75,21 @@
     </div>
 </div>
 
+<div class="modal" id="szczesliwynumerek-page">
+    <div class="modal-content">
+        <div class="modal-heading">
+            <img src="close.png" onClick="closeModal();">
+            <p>Szczęśliwy numerek</p>
+        </div>
+        <div id="lnToday"></div>
+        <div id="lnTomorrow"></div>
+        <center>
+        <br>
+        <h3 id="tomorrowsln">Szczęśliwe numerki na następny dzień<br>po godz. 15:00</h3>
+        </center>
+    </div>
+</div>
+
 </body>
 
 
@@ -82,7 +97,54 @@
 
 </html>
 
+<script src="luckynumbers.js"></script>
+
 <script>
+var today = new Date();
+var tomorrow = new Date(today)
+tomorrow.setDate(tomorrow.getDate() + 1)
+
+hour = today.getHours();
+dd = String(today.getDate()).padStart(2, '0');
+mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+yyyy = today.getFullYear();
+today = dd + '.' + mm + '.' + yyyy;
+
+dd = String(tomorrow.getDate()).padStart(2, '0');
+mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
+yyyy = tomorrow.getFullYear();
+tomorrow = dd + '.' + mm + '.' + yyyy;
+
+
+luckynumbers = JSON.parse(luckynumbers);
+
+if (luckynumbers[today] != undefined) {
+    ln = luckynumbers[today]
+    lnToday = "<h2>"+today+"</h2> <table> <tr> <td>7A</td> <td>"+ln["7a"]+"</td> </tr> <tr> <td>8A</td> <td>"+ln["8a"]+"</td> </tr> <tr> <td>8B</td> <td>"+ln["8b"]+"</td> </tr> <tr> <td>1 LO</td> <td>"+ln["1lo"]+"</td> </tr> <tr> <td>2 LO</td> <td>"+ln["2lo"]+"</td> </tr> <tr> <td>3 LO</td> <td>"+ln["3lo"]+"</td> </tr> <tr> <td>4 LO</td> <td>"+ln["4lo"]+"</td> </tr> </table>"
+} else {
+    lnToday = "<h2><center>Dzisiaj nie ma szczęśliwych numerków!</center></h2>"
+}
+if (luckynumbers[tomorrow] != undefined && hour >= 15) {
+    ln = luckynumbers[tomorrow]
+    lnTomorrow = "<h2>"+tomorrow+"</h2> <table> <tr> <td>7A</td> <td>"+ln["7a"]+"</td> </tr> <tr> <td>8A</td> <td>"+ln["8a"]+"</td> </tr> <tr> <td>8B</td> <td>"+ln["8b"]+"</td> </tr> <tr> <td>1 LO</td> <td>"+ln["1lo"]+"</td> </tr> <tr> <td>2 LO</td> <td>"+ln["2lo"]+"</td> </tr> <tr> <td>3 LO</td> <td>"+ln["3lo"]+"</td> </tr> <tr> <td>4 LO</td> <td>"+ln["4lo"]+"</td> </tr> </table>"
+    document.getElementById("tomorrowsln").innerHTML = "";
+} else if (luckynumbers[tomorrow] != undefined) {
+    document.getElementById("tomorrowsln").innerHTML = "Szczęśliwe numerki na następny dzień<br>po godz. 15:00";
+    lnTomorrow = ""
+} else {
+    lnTomorrow = ""
+    document.getElementById("tomorrowsln").innerHTML = "";
+}
+
+if (luckynumbers[today] == undefined && luckynumbers[tomorrow] == undefined) {
+    lnToday = "<h2><center>Brak szczęśliwych numerków!</center></h2>"
+    lnTomorrow = ""
+    document.getElementById("tomorrowsln").innerHTML = "";
+}
+
+document.getElementById("lnToday").innerHTML = lnToday;
+document.getElementById("lnTomorrow").innerHTML = lnTomorrow;
+
 if (localStorage.getItem("fname") != null) {
     document.getElementById("user-data").innerHTML = "Witaj, "+localStorage.getItem("fname")+"!";
     document.getElementById("fname").value = localStorage.getItem("fname") 
