@@ -54,22 +54,24 @@
         </div>
         <h2>Informacje o Tobie</h2>
         <h3>Dodaj swoje imię, nazwisko oraz klasę, aby otrzymywać bardziej spersonalizowane informacje.</h3>
-        <input type="text" class="text-input" id="fname" placeholder="Imię" autocomplete="off"><br>
-        <input type="text" class="text-input" id="sname" placeholder="Nazwisko" autocomplete="off"><br>
-        <select class="text-input" id="class">
-            <option value="none" selected hidden>- Wybierz klasę -</option>
-            <option value="7a">7a</option>
-            <option value="8a">8a</option>
-            <option value="8b">8b</option>
-            <option value="1lo">1 LO</option>
-            <option value="2lo">2 LO</option>
-            <option value="3lo">3 LO</option>
-            <option value="4lo">4 LO</option>
-        </select><br>
-        <center>
-            <input type="submit" value="Zapisz" class="save-btn" onClick="changeData();">
-            <p class="datareset" onClick="resetData();">Zresetuj wszystkie dane</p>
-        </center>
+        <form onSubmit="changeData();">
+            <input type="text" class="text-input" id="fname" placeholder="Imię" autocomplete="off" required><br>
+            <input type="text" class="text-input" id="sname" placeholder="Nazwisko" autocomplete="off" required><br>
+            <select class="text-input" id="class" required>
+                <option value="none" selected hidden>- Wybierz klasę -</option>
+                <option value="7a">7a</option>
+                <option value="8a">8a</option>
+                <option value="8b">8b</option>
+                <option value="1lo">1 LO</option>
+                <option value="2lo">2 LO</option>
+                <option value="3lo">3 LO</option>
+                <option value="4lo">4 LO</option>
+            </select><br>
+            <center>
+                <input type="submit" value="Zapisz" class="save-btn">
+                <p class="datareset" onClick="resetData();">Zresetuj wszystkie dane</p>
+            </center>
+        </form>
     </div>
 </div>
 
