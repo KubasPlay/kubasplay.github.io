@@ -39,10 +39,43 @@ h1 {
     transition: opacity 0.4s linear;
 }
 
-.settings {
-    opacity: 0;
-    display: none;
-    transition: opacity 0.4s linear;
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 15px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-height: 88%;
+    border-radius: 10px;
+}
+
+.modal-heading {
+    display: flex;
+    height: 25px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.modal-heading p {
+    padding-left: 10px;
+    font-size: 30px;
+}
+
+.modal-heading img {
+    height: 20px;
 }
 
 .wide-box {

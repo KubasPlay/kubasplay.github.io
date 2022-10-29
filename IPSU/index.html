@@ -46,8 +46,13 @@
     </div>
 </div>
 
-<div class="settings" id="settings-page">
-    <h1>Ustawienia</h1>
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <div class="modal-heading">
+            <img src="close.png" onClick="closeModal();">
+            <p>Ustawienia</p>
+        </div>
+    </div>
 </div>
 
 </body>
@@ -58,20 +63,23 @@
 </html>
 
 <script>
-
+var modal = document.getElementById("modal");
 function loadBoxes() {
     document.getElementById("boxes").style.opacity = "100%";
 }
 
 function settingsPage() {
-    document.getElementById("boxes").style.opacity = "0%";
-    setTimeout(() => {
-        document.getElementById("boxes").style.display = "none";
-        document.getElementById("settings-page").style.display = "initial";
-    }, 1000)
-    setTimeout(() => {
-        document.getElementById("settings-page").style.opacity = "100%";
-    }, 1500)
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
 
 
