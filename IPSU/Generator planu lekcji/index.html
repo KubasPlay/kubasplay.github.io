@@ -1,0 +1,104 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<table width="100%">
+    <tr>
+        <th id="0">Poniedziałek</th>
+        <th>Wtorek</th>
+        <th>Środa</th>
+        <th>Czwartek</th>
+        <th>Piątek</th>
+    </tr>
+    <tr>
+        <td id="1"></td>
+        <td id="10"></td>
+        <td id="19"></td>
+        <td id="28"></td>
+        <td id="37"></td>
+    </tr>
+    <tr>
+        <td id="2"></td>
+        <td id="11"></td>
+        <td id="20"></td>
+        <td id="29"></td>
+        <td id="38"></td>
+    </tr>
+    <tr>
+        <td id="3"></td>
+        <td id="12"></td>
+        <td id="21"></td>
+        <td id="30"></td>
+        <td id="39"></td>
+    </tr>
+    <tr>
+        <td id="4"></td>
+        <td id="13"></td>
+        <td id="22"></td>
+        <td id="31"></td>
+        <td id="40"></td>
+    </tr>
+    <tr>
+        <td id="5"></td>
+        <td id="14"></td>
+        <td id="23"></td>
+        <td id="32"></td>
+        <td id="41"></td>
+    </tr>
+    <tr>
+        <td id="6"></td>
+        <td id="15"></td>
+        <td id="24"></td>
+        <td id="33"></td>
+        <td id="42"></td>
+    </tr>
+    <tr>
+        <td id="7"></td>
+        <td id="16"></td>
+        <td id="25"></td>
+        <td id="34"></td>
+        <td id="43"></td>
+    </tr>
+    <tr>
+        <td id="8"></td>
+        <td id="17"></td>
+        <td id="26"></td>
+        <td id="35"></td>
+        <td id="44"></td>
+    </tr>
+    <tr>
+        <td id="9"></td>
+        <td id="18"></td>
+        <td id="27"></td>
+        <td id="36"></td>
+        <td id="45"></td>
+    </tr>
+</table>
+
+
+</body>
+
+
+</html>
+
+<script>
+data_2lo = {
+    "biol2": [2, 4, 6]
+}
+timetable = ["Poniedziałek"]
+console.log(timetable);
+console.log(data_2lo["biol2"])
+data_2lo["biol2"].forEach(lessonNo => timetable[lessonNo] = "Biologia");
+console.log(timetable);
+
+for (let i = 0; i < timetable.length; i++) {
+    if (timetable[i] != undefined) {
+        document.getElementById(String(i)).innerHTML = timetable[i];
+    } else {
+        document.getElementById(String(i)).innerHTML = "okienko"
+    }
+}
+
+</script>
