@@ -15,6 +15,19 @@ h1 {
     font-weight: normal;
 }
 
+h2 {
+    font-weight: normal;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .logo {
     display: flex;
     height: 40px;
@@ -66,7 +79,7 @@ h1 {
     display: flex;
     height: 25px;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .modal-heading p {
@@ -76,6 +89,31 @@ h1 {
 
 .modal-heading img {
     height: 20px;
+}
+
+.text-input {
+    width: 80%;
+    height: 30px;
+    border-radius: 10px;
+    border: solid 0.1px;
+    margin-top: 10px;
+    padding-left: 5px;
+}
+
+.save-btn {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: solid 0;
+    margin-top: 10px;
+    padding-left: 5px;
+    background-color: #d7e5ef;
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+.datareset {
+    color: #d62246;
 }
 
 .wide-box {
