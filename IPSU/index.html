@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+</head>
+
+<body onLoad="loadBoxes();">
+
+<div class="logo" id="logo">
+    <img src="logo.png" height="100%">
+    <p>Samorząd<br>Uczniowski</p>
+</div>
+
+<div class="boxes" id="boxes">
+    <div class="user-data" id="user-data">
+        Witaj, [name]!
+    </div>
+
+    <div class="wide-box" id="szczesliwynumerek">
+        Sprawdź szczęśliwy numerek
+    </div>
+
+    <div class="wrapper">
+        <div class="left">
+            <div class="box1" id="lekcja">
+                10:20<br>EDB
+            </div>
+            <div class="box2" id="propozycje">
+                Masz pomysł dla SU?
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="box3" id="kalendarz">
+                Najbliższe wydarzenie
+            </div>
+            <div class="box4" id="ustawienia" onClick="settingsPage();">
+                Ustawienia
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="settings" id="settings-page">
+    <h1>Ustawienia</h1>
+</div>
+
+</body>
+
+
+
+
+</html>
+
+<script>
+
+function loadBoxes() {
+    document.getElementById("boxes").style.opacity = "100%";
+}
+
+function settingsPage() {
+    document.getElementById("boxes").style.opacity = "0%";
+    setTimeout(() => {
+        document.getElementById("boxes").style.display = "none";
+        document.getElementById("settings-page").style.display = "initial";
+        document.getElementById("settings-page").style.opacity = "100%";
+    }, 1000)
+}
+
+
+</script>

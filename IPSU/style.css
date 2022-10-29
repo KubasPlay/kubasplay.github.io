@@ -1,0 +1,146 @@
+body {
+    background-color: #d7e5ef;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    margin: 0;
+    padding: 30px;
+    background-image: url('background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: auto;
+}
+
+h1 {
+    font-weight: normal;
+}
+
+.logo {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo p {
+    padding-left: 7px;
+    font-size: 19px;
+    color: #a80c2f;
+}
+
+.user-data {
+    margin: 0 0 10px 0;
+    height: 50px;
+    font-size: 30px;
+}
+
+.boxes {
+    opacity: 0;
+    transition: opacity 0.4s linear;
+}
+
+.settings {
+    opacity: 0;
+    transition: opacity 0.4s linear;
+}
+
+.wide-box {
+    max-width: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.box1 {
+    margin: 10px 0 10px 0;
+    max-width: 100%;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.box2 {
+    margin: 10px 0 10px 0;
+    max-width: 100%;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    font-size: 17px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.box3 {
+    margin: 10px 0 10px 0;
+    max-width: 100%;
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.box4 {
+    margin: 10px 0 10px 0;
+    max-width: 100%;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.wrapper {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.left {
+    width: 48.5%;
+    float: left;
+}
+
+.right {
+    width: 48.5%;
+    float: right;
+}
+
+/*@media only screen and (min-width: 600px) {
+    body {
+        padding: 50px;
+    }
+    .logo {
+        height: 75px;
+    }
+    .logo p {
+        font-size: 30px;
+        padding-left: 10px;
+    }
+    .boxes {
+        width: 450px;
+    }
+}*/
+
+
