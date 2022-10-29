@@ -36,12 +36,12 @@ h1 {
 
 .boxes {
     opacity: 0;
-    transition: opacity 0.4s linear;
+    transition: opacity 0.4s linear 0.1s;
 }
 
 .settings {
     opacity: 0;
-    transition: opacity 0.4s linear;
+    transition: opacity 0.4s linear 0.1s;
 }
 
 .wide-box {
