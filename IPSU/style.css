@@ -95,9 +95,10 @@ h3 {
     width: 80%;
     height: 30px;
     border-radius: 10px;
-    border: solid 0.5px;
+    border: solid 0px;
     margin-top: 10px;
     padding-left: 5px;
+    background-color: #f6f6f6;
 }
 
 .save-btn {
