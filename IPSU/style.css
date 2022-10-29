@@ -41,6 +41,7 @@ h1 {
 
 .settings {
     opacity: 0;
+    display: none;
     transition: opacity 0.4s linear;
 }
 
